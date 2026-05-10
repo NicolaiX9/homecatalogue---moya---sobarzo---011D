@@ -1,0 +1,24 @@
+package com.servicio.almacenes.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "almacen")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Almacen {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idAlmacen;
+    private String calleDireccion;
+    private String numeroDireccion;
+}
