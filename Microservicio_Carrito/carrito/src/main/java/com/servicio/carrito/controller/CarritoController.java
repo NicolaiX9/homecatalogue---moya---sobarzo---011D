@@ -47,7 +47,7 @@ public class CarritoController {
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
 
-            car.getBody().setId_usuario(carrito.getId_usuario());
+            car.getBody().setIdUsuario(carrito.getIdUsuario());
             car.getBody().setTotal(carrito.getTotal());
             
             
