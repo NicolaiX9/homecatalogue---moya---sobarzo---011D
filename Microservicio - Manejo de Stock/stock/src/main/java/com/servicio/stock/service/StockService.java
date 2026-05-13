@@ -1,6 +1,7 @@
 package com.servicio.stock.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ public class StockService {
         return stockRepository.save(stock);
     } 
     // Buscar por id
-    public List<Stock> buscarPorId(Long idStock){
-        return stockRepository.findByIdStock(idStock);
+    public Optional<Stock> buscarPorId(Long idStock){
+        return stockRepository.findById(idStock);
     } 
     // Eliminar
     public void borrarStock(Stock stock){
