@@ -1,7 +1,7 @@
 package com.servicio.carrito.service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +24,19 @@ public class CarritoService {
         return carritoRepository.findAll();
     }
 
-   public Carrito crearCarrito(Carrito producto){
-        return carritoRepository.save(producto);
+   public Carrito crearCarrito(Carrito carrito){
+
+        Carrito guardado = carritoRepository.save(carrito);
+
+        Carrito completo = carritoRepository.findById(guardado.getId()).orElse(guardado);
+
+
+        return obtenerDatosUsuario(completo);
     }
 
 
 
-    public Optional <Carrito> buscarPorId(Long id){
+    public Carrito buscarPorId(Long id){
         Carrito carrito = carritoRepository.findById(id).orElse(null);
         
         if (carrito != null){
@@ -46,7 +52,7 @@ public class CarritoService {
         carritoRepository.delete(carrito);
     }
 
-    public Optional<Carrito> obtenerDatosUsuario(Carrito carrito){
+    public Carrito obtenerDatosUsuario(Carrito carrito){
 
         if (carrito.getIdUsuario() != null){
             try{//la variable tipo Object evita que se caiga el programa
@@ -70,7 +76,7 @@ public class CarritoService {
             
             }
 
-            return Optional.of(carrito);
+            return carrito;
 
 
     }

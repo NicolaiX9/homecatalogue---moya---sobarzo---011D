@@ -40,4 +40,4 @@ spring:
    - id: carritos-service
      uri: http://localhost:9095
      predicates:
-     - Path=/api/v1/carritos/**
+     - Path=/carritos/**

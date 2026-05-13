@@ -22,9 +22,9 @@ public class Carrito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCarrito;
-    private int total;
+    private Long id;
 
+    private int total;
 
     private Long idUsuario;
 
