@@ -19,6 +19,10 @@ public class CarritoDetalleService {
         return carritoDetalleRepository.findAll();
     }
 
+   public CarritoDetalle crearCarritoDetalle(CarritoDetalle carritoDetalle){
+        return carritoDetalleRepository.save(carritoDetalle);
+    }
+
     public Optional<CarritoDetalle> buscarPorId(Long id){
         return carritoDetalleRepository.findById(id);
     }

@@ -14,42 +14,57 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servicio.carrito.model.Carrito;
-import com.servicio.carrito.repository.CarritoRepository;
+import com.servicio.carrito.service.CarritoService;
 
 @RestController
-@RequestMapping("/api/v1/carrito")
+@RequestMapping("/api/v1/carritos")
 public class CarritoController {
 
     @Autowired
-    private CarritoRepository carritoRepository;
+    private CarritoService carritoService;
 
     @GetMapping
     public List<Carrito> listar(){
-        return carritoRepository.findAll();
+        return carritoService.listar();
+    }
+
+    @GetMapping("/{idCarrito}")
+    public ResponseEntity<Carrito> buscarPorId(Long id){
+        return carritoService.buscarPorId(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Carrito crearCarrito(Carrito carrito){
-        return carritoRepository.save(carrito);
+        return carritoService.crearCarrito(carrito);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Carrito> actualizarCarrito(@PathVariable Long id, @RequestBody Carrito carritoDetalles) {
-        return carritoRepository.findById(id)
-    // cambiar esto a por uno q hemos visto.
-        .map(carritoExistente -> {
-            carritoExistente.setId_usuario(carritoDetalles.getId_usuario());
-            carritoExistente.setTotal(carritoDetalles.getTotal());
+    @PutMapping("/{idCarrito}")
+    public ResponseEntity<Carrito> actualizar(@PathVariable Long id, @RequestBody Carrito carrito){
+        try {
+            ResponseEntity<Carrito> car = carritoService.buscarPorId(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
 
-            Carrito actualizado = carritoRepository.save(carritoExistente);
-            return ResponseEntity.ok(actualizado);
-        })
-        .orElse(ResponseEntity.notFound().build());
-}
+            car.getBody().setId_usuario(carrito.getId_usuario());
+            car.getBody().setTotal(carrito.getTotal());
+            
+            
+            carritoService.crearCarrito(carrito);
 
-    @DeleteMapping("/{id}")
+            return ResponseEntity.ok(carrito);
+            
+
+        } catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @DeleteMapping("/{idCarrito}")
     public void eliminarCarrito(Carrito carrito){
-        carritoRepository.delete(carrito);
+        carritoService.eliminarCarrito(carrito);
     }
 
     

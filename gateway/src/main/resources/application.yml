@@ -18,14 +18,24 @@ spring:
       - Path=/usuarios/**
 
 # RUTA PARA EL SERVICIO DE ALMACENES
-   - id: carritos-service
+   - id: almacenes-service
      uri: http://localhost:9092
      predicates:
      - Path=/almacenes/**
 
 
+#RUTA PARA EL SERVICIO DE STOCK
+   - id: stock-service
+     uri: http://localhost:9093
+     predicates:
+     - Path=/stock/**
+
+
+
+
+
 # RUTA PARA EL SERVICIO DE TRANSPORTISTAS
-   - id: transportistas-service
+   - id: carritos-service
      uri: http://localhost:9095
      predicates:
-     - Path=/transportistas/**
+     - Path=/api/v1/carritos/**

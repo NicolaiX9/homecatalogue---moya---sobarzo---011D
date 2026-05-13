@@ -26,6 +26,6 @@ public class CarritoDetalle {
     private int cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "idCarrito")
+    @JoinColumn(name = "carrito_idCarrito")
     private Carrito carrito;
 }
