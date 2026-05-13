@@ -20,9 +20,7 @@ public class CarritoService {
     @Autowired
     private CarritoRepository carritoRepository;
 
-    public List<Carrito> listar(){
-        return carritoRepository.findAll();
-    }
+   
 
    public Carrito crearCarrito(Carrito carrito){
 
@@ -46,6 +44,10 @@ public class CarritoService {
 
         return null;
     
+    }
+
+    public List<Carrito> listar(){
+        return carritoRepository.findAll();
     }
 
     public void eliminarCarrito(Carrito carrito){

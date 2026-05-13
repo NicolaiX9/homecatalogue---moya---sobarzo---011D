@@ -47,9 +47,9 @@ public class CarritoController {
             car.setTotal(carrito.getTotal());
             
             
-            carritoService.crearCarrito(carrito);
+            carritoService.crearCarrito(car);
 
-            return carrito;
+            return car;
             
         
     }
