@@ -29,42 +29,36 @@ public class CarritoDetalleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CarritoDetalle> buscarPorId(Long id){
-        return carritoDetalleService.buscarPorId(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    public CarritoDetalle buscarPorId(@PathVariable Long id){
+        return carritoDetalleService.buscarPorId(id);
     }
 
-
-    @PostMapping CarritoDetalle guardar(@RequestBody CarritoDetalle carritoDetalle){
+    @PostMapping
+    public CarritoDetalle crearCarrito(@RequestBody CarritoDetalle carritoDetalle){
         return carritoDetalleService.crearCarritoDetalle(carritoDetalle);
     }
 
-
-    @PutMapping("/{idProducto}")
-    public ResponseEntity<CarritoDetalle> actualizar(@PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
-        try {
-            ResponseEntity<CarritoDetalle> car = carritoDetalleService.buscarPorId(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
-
-            car.getBody().setCantidad(carritoDetalle.getCantidad());
-            car.getBody().setProductoId(carritoDetalle.getProductoId());
-            car.getBody().setCarrito(carritoDetalle.getCarrito());
-            
-            
-            carritoDetalleService.crearCarritoDetalle(carritoDetalle);
-
-            return ResponseEntity.ok(carritoDetalle);
+    @PutMapping("/{id}")
+    public CarritoDetalle actualizar(@PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
+       
+            CarritoDetalle carde = carritoDetalleService.buscarPorId(id);
             
 
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
-        }
+            carde.setIdProducto(carritoDetalle.getIdProducto());
+            carde.setCantidad(carritoDetalle.getCantidad());
+            
+            
+            carritoDetalleService.crearCarritoDetalle(carde);
+
+            return carde;
+            
+        
     }
+
 
     @DeleteMapping("/{id}")
-    public void eliminarCarrito(CarritoDetalle carritoDetalle){
-        carritoDetalleService.eliminarCarrito(carritoDetalle);
+    public void eliminarCarritoDetalle(CarritoDetalle carrito){
+        carritoDetalleService.eliminarCarritoDetalle(carrito);
     }
+
 }
