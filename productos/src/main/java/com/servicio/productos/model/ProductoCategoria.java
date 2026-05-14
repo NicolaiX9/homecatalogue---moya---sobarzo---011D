@@ -18,6 +18,6 @@ public class ProductoCategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoria;
+    private Long id;
     private String categoria;
 }

@@ -33,16 +33,16 @@ public class ProductoController {
     }
 
     @PutMapping("/{idProducto}")
-    public ResponseEntity<Producto> actualizar(@PathVariable Long idProducto, @RequestBody Producto producto){
+    public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto){
         try {
-            ResponseEntity<Producto> prod = productoService.findById(idProducto)
+            ResponseEntity<Producto> prod = productoService.findById(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
 
             prod.getBody().setNombre(producto.getNombre());
             prod.getBody().setDescripcion(producto.getDescripcion());
             prod.getBody().setPrecio(producto.getPrecio());
-            prod.getBody().setId_categoria(producto.getId_categoria());
+            prod.getBody().setId(producto.getId());
             
             productoService.crearProducto(producto);
 

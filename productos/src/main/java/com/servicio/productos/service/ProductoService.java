@@ -19,8 +19,8 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
-    public Optional<Producto> findById(Long idProducto){
-        return productoRepository.findById(idProducto);
+    public Optional<Producto> findById(Long id){
+        return productoRepository.findById(id);
     }
 
 

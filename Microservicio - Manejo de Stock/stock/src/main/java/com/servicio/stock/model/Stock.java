@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,16 @@ public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idStock;
-    private Long idProducto;
+    private Long id;
     private int cantidad;
+    private Long idProducto;
     private Long idAlmacen;
+
+    @Transient
+    private Object datosProducto;
+
+    @Transient
+    private Object datosAlmacen;
+    
 
 }

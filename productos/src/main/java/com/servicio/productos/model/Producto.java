@@ -1,9 +1,12 @@
 package com.servicio.productos.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,11 +21,16 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProducto;
+    private Long id;
     private String nombre;
     private String descripcion;
     private int precio;
-    private Long id_categoria;
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="producto_categoria_id")
+    private ProductoCategoria productoCategoria;
+   
 
     
 
