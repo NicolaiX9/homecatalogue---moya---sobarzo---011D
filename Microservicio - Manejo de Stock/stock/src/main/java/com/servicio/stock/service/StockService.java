@@ -45,6 +45,8 @@ public class StockService {
     }
 
     public List<Stock> listar(){
+
+        
         return stockRepository.findAll();
     }
 

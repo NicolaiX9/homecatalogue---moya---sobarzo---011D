@@ -32,7 +32,7 @@ public class ProductoController {
         return productoService.crearProducto(producto);
     }
 
-    @PutMapping("/{idProducto}")
+    @PutMapping("/{id}")
     public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto){
         try {
             ResponseEntity<Producto> prod = productoService.findById(id)
