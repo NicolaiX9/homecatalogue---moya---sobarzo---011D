@@ -73,16 +73,16 @@ public class StockService {
                 }
 
                 try{//la variable tipo Object evita que se caiga el programa
-                Object Almacen = webClientBuilder.build()
+                Object Producto = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9092/almacenes/" + stock.getIdProducto())
+                .uri("http://localhost:9094/productos/" + stock.getIdProducto())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
                 .block();
 
-                stock.setDatosProducto(stock);
+                stock.setDatosProducto(Producto);
                 } catch(Exception e){
 
                     //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
