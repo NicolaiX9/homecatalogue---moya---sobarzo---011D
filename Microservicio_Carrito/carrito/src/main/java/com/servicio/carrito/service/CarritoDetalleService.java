@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.servicio.carrito.model.CarritoDetalle;
 import com.servicio.carrito.repository.CarritoDetalleRepository;
+import com.servicio.carrito.repository.CarritoRepository;
 
 
 @Service
@@ -21,12 +22,17 @@ public class CarritoDetalleService {
     @Autowired
     private CarritoDetalleRepository carritoDetalleRepository;
 
-   
+    @Autowired
+    private CarritoRepository carritoRepository;
 
    public CarritoDetalle crearCarritoDetalle(CarritoDetalle carritoDetalle){
 
         CarritoDetalle guardado = carritoDetalleRepository.save(carritoDetalle);
-
+        if (guardado.getCarrito() != null && guardado.getCarrito().getId() != null){
+            carritoRepository.findById(guardado.getCarrito().getId())
+            //El punto es un Elif
+            .ifPresent(guardado::setCarrito);
+        }
         CarritoDetalle completo = carritoDetalleRepository.findById(guardado.getId()).orElse(guardado);
 
 
