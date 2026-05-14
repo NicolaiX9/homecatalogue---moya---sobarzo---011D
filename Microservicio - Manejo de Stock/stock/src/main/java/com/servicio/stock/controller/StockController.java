@@ -24,40 +24,44 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
+
     @GetMapping
     public List<Stock> listar(){
-        return stockService.listarStocks();
+        return stockService.listar();
+    }
+
+    @GetMapping("/{id}")
+    public Stock buscarPorId(@PathVariable Long id){
+        return stockService.buscarPorId(id);
     }
 
     @PostMapping
-    public Stock crear(Stock stock){
+    public Stock crearCarrito(@RequestBody Stock stock){
         return stockService.crearStock(stock);
     }
 
-    @GetMapping("/{idStock}")
-    public Optional<Stock> buscarPorId(Long idStock){
-        return stockService.buscarPorId(idStock);
+    @PutMapping("/{id}")
+    public Stock actualizar(@PathVariable Long id, @RequestBody Stock stock){
+       
+           Stock sto = stockService.buscarPorId(id);
+            
+            sto.setCantidad(stock.getCantidad());
+            sto.setIdProducto(stock.getIdProducto());
+            sto.setIdAlmacen(stock.getIdAlmacen());
+            
+            
+            
+            stockService.crearStock(sto);
+
+            return sto;
+            
+        
     }
 
-    @PutMapping("/{idStock}")
-    public ResponseEntity<Stock> actualizar(@PathVariable Long idStock, @RequestBody Stock stock){
-        try {
-            ResponseEntity<Stock> sto = stockService.buscarPorId(idStock)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
 
-            sto.getBody().setCantidad(stock.getCantidad());
-
-            stockService.crearStock(stock);
-
-            return ResponseEntity.ok(stock);
-    } catch (Exception e) {
-        return ResponseEntity.notFound().build();
+    @DeleteMapping("/{id}")
+    public void eliminarCarrito(Stock stock){
+        stockService.eliminarStock(stock);
     }
-}
 
-    @DeleteMapping("/{idStock}")
-    public void eliminar(Stock stock){
-        stockService.borrarStock(stock);
-    }
 }

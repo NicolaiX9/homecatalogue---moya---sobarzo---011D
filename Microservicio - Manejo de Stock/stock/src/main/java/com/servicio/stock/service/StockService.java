@@ -1,7 +1,6 @@
 package com.servicio.stock.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class StockService {
 
    
 
-   public Stock crearCarrito(Stock stock){
+   public Stock crearStock(Stock stock){
 
         Stock guardado = stockRepository.save(stock);
 
@@ -49,7 +48,7 @@ public class StockService {
         return stockRepository.findAll();
     }
 
-    public void eliminarCarrito(Stock stock){
+    public void eliminarStock(Stock stock){
         stockRepository.delete(stock);
     }
 
@@ -60,7 +59,7 @@ public class StockService {
                 Object Almacen = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9092/almacenes/" + stock.g())
+                .uri("http://localhost:9092/almacenes/" + stock.getIdAlmacen())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
@@ -70,31 +69,31 @@ public class StockService {
                 } catch(Exception e){
 
                     //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
-                    stock.setDatosUsuario("La información del usuario no está disponible");
+                    stock.setDatosAlmacen("La información del almacen no está disponible");
                 }
 
                 try{//la variable tipo Object evita que se caiga el programa
                 Object Almacen = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9092/almacenes/" + stock.g())
+                .uri("http://localhost:9092/almacenes/" + stock.getIdProducto())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
                 .block();
 
-                stock.setDatosUsuario(stock);
+                stock.setDatosProducto(stock);
                 } catch(Exception e){
 
                     //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
-                    carrito.setDatosUsuario("La información del usuario no está disponible");
+                    stock.setDatosProducto("La información del producto no está disponible");
                 }
 
 
             
             }
 
-            return carrito;
+            return stock;
 
 
     }
