@@ -23,7 +23,6 @@ public class ProductoService {
         return productoRepository.findById(id);
     }
 
-
     public Producto crearProducto(Producto producto){
         return productoRepository.save(producto);
     }
