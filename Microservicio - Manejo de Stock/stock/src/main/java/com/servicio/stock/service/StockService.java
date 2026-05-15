@@ -46,7 +46,12 @@ public class StockService {
 
     public List<Stock> listar(){
 
-        
+        List<Stock> lista = stockRepository.findAll();
+
+        for (Stock stock : lista){
+            obtenerDatosAlmacenProducto(stock);
+    }
+
         return stockRepository.findAll();
     }
 

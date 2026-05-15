@@ -47,6 +47,13 @@ public class CarritoService {
     }
 
     public List<Carrito> listar(){
+        
+        List<Carrito> lista = carritoRepository.findAll();
+
+        for (Carrito carrito : lista){
+            obtenerDatosUsuario(carrito);
+    }
+        
         return carritoRepository.findAll();
     }
 
