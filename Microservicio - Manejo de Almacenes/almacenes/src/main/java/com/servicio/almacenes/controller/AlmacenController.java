@@ -25,12 +25,12 @@ public class AlmacenController {
     }
 
     @PostMapping
-    public Almacen crearAlmacen(Almacen almacen){
+    public Almacen guardar(Almacen almacen){
         return almacenService.crearAlmacen(almacen);
     }
 
-    @DeleteMapping("{idAlmacen}")
-    public void borrarAlmacen(Almacen almacen){
+    @DeleteMapping("{id}")
+    public void eliminar(Almacen almacen){
         almacenService.borrarAlmacen(almacen);
     }
 }

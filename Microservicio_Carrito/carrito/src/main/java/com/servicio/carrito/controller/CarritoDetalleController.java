@@ -33,17 +33,15 @@ public class CarritoDetalleController {
     }
 
     @PostMapping
-    public CarritoDetalle crearCarrito(@RequestBody CarritoDetalle carritoDetalle){
+    public CarritoDetalle guardar(@RequestBody CarritoDetalle carritoDetalle){
         return carritoDetalleService.crearCarritoDetalle(carritoDetalle);
     }
 
     @PutMapping("/{id}")
-    public CarritoDetalle actualizar(@PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
+    public CarritoDetalle modificar(@PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
        
             CarritoDetalle carde = carritoDetalleService.buscarPorId(id);
             
-
-            carde.setIdProducto(carritoDetalle.getIdProducto());
             carde.setCantidad(carritoDetalle.getCantidad());
             
             
@@ -56,7 +54,7 @@ public class CarritoDetalleController {
 
 
     @DeleteMapping("/{id}")
-    public void eliminarCarritoDetalle(CarritoDetalle carrito){
+    public void eliminar(CarritoDetalle carrito){
         carritoDetalleService.eliminarCarritoDetalle(carrito);
     }
 

@@ -3,13 +3,9 @@ package com.servicio.productos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,29 +25,9 @@ public class ProductoCategoriaController {
     }
 
     @PostMapping
-    public ProductoCategoria crear(ProductoCategoria productoCategoria){
+    public ProductoCategoria guardar(ProductoCategoria productoCategoria){
         return productoCategoriaService.guardar(productoCategoria);
     }
-
-    @PutMapping("/idCategoria")
-    public ResponseEntity<ProductoCategoria> actualizar(@PathVariable Long idCategoria, @RequestBody ProductoCategoria productoCategoria){
-        try {
-            ResponseEntity<ProductoCategoria> prodcat = productoCategoriaService.findById(idCategoria)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
-
-            prodcat.getBody().setCategoria(productoCategoria.getCategoria());
-            
-            productoCategoriaService.guardar(productoCategoria);
-
-            return ResponseEntity.ok(productoCategoria);
-            
-
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-
 
     @DeleteMapping("/{idCategoria}")
     public void eliminar(ProductoCategoria productoCategoria){

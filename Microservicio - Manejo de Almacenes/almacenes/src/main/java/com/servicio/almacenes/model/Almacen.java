@@ -18,7 +18,7 @@ public class Almacen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAlmacen;
+    private Long id;
     private String calleDireccion;
     private String numeroDireccion;
 }

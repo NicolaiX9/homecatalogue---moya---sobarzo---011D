@@ -19,7 +19,7 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
-    public Optional<Producto> findById(Long id){
+    public Optional<Producto> buscarPorId(Long id){
         return productoRepository.findById(id);
     }
 
@@ -29,6 +29,10 @@ public class ProductoService {
 
     public void eliminarProducto(Producto producto){
         productoRepository.delete(producto);
+    }
+
+     public Optional<Producto> buscarPorCategoria(Long idCategoria){
+        return productoRepository.findByProductoCategoria(idCategoria);
     }
 
 }

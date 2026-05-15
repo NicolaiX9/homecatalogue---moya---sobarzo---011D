@@ -2,7 +2,7 @@ package com.servicio.usuario.controller;
 
 import java.util.List;
 
-import org.apache.el.stream.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,7 +33,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <Usuario> encontrarPorId(@PathVariable Long id) {
+    public ResponseEntity <Usuario> buscarPorId(@PathVariable Long id) {
         return usuarioService.buscarPorId(id)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
@@ -50,14 +50,14 @@ public class UsuarioController {
     }
 
     @GetMapping("/run/{run}")
-    public ResponseEntity<Usuario> encontrarPorRun(@PathVariable String run){
+    public ResponseEntity<Usuario> buscarPorRun(@PathVariable String run){
       return usuarioService.encontrarPorRun(run)
       .map(ResponseEntity::ok)
       .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> actualizar(@PathVariable Long id, @RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> modificar(@PathVariable Long id, @RequestBody Usuario usuario){
        
             ResponseEntity <Usuario> user = usuarioService.buscarPorId(id)
             .map(ResponseEntity::ok)

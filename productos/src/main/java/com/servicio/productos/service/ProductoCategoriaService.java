@@ -20,12 +20,6 @@ public class ProductoCategoriaService {
         return productoCategoriaRepository.findAll();
     }
 
-    public Optional<ProductoCategoria> findById(Long idCategoria){
-        return productoCategoriaRepository.findById(idCategoria);
-    }
-
-
-
     public ProductoCategoria guardar(ProductoCategoria productoCategoria){
         return productoCategoriaRepository.save(productoCategoria);
     }

@@ -33,17 +33,15 @@ public class CarritoController {
     }
 
     @PostMapping
-    public Carrito crearCarrito(@RequestBody Carrito carrito){
+    public Carrito guardar(@RequestBody Carrito carrito){
         return carritoService.crearCarrito(carrito);
     }
 
     @PutMapping("/{id}")
-    public Carrito actualizar(@PathVariable Long id, @RequestBody Carrito carrito){
+    public Carrito modificar(@PathVariable Long id, @RequestBody Carrito carrito){
        
             Carrito car = carritoService.buscarPorId(id);
             
-
-            car.setIdUsuario(carrito.getIdUsuario());
             car.setTotal(carrito.getTotal());
             
             
@@ -56,7 +54,7 @@ public class CarritoController {
 
 
     @DeleteMapping("/{id}")
-    public void eliminarCarrito(Carrito carrito){
+    public void eliminar(Carrito carrito){
         carritoService.eliminarCarrito(carrito);
     }
 

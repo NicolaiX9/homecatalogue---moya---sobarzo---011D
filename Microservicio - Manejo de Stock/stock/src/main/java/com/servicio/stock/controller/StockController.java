@@ -34,20 +34,16 @@ public class StockController {
     }
 
     @PostMapping
-    public Stock crearCarrito(@RequestBody Stock stock){
+    public Stock guardar(@RequestBody Stock stock){
         return stockService.crearStock(stock);
     }
 
     @PutMapping("/{id}")
-    public Stock actualizar(@PathVariable Long id, @RequestBody Stock stock){
+    public Stock modificar(@PathVariable Long id, @RequestBody Stock stock){
        
            Stock sto = stockService.buscarPorId(id);
             
-            sto.setCantidad(stock.getCantidad());
-            sto.setIdProducto(stock.getIdProducto());
-            sto.setIdAlmacen(stock.getIdAlmacen());
-            
-            
+            sto.setCantidad(stock.getCantidad());            
             
             stockService.crearStock(sto);
 
@@ -58,7 +54,7 @@ public class StockController {
 
 
     @DeleteMapping("/{id}")
-    public void eliminarCarrito(Stock stock){
+    public void eliminar(Stock stock){
         stockService.eliminarStock(stock);
     }
 

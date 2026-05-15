@@ -28,14 +28,22 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto crear(Producto producto){
+    public Producto guardar(Producto producto){
         return productoService.crearProducto(producto);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity <Producto> buscarPorId(@PathVariable Long id) {
+        return productoService.buscarPorId(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
+    }
+    
+
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto){
+    public ResponseEntity<Producto> modificar(@PathVariable Long id, @RequestBody Producto producto){
         try {
-            ResponseEntity<Producto> prod = productoService.findById(id)
+            ResponseEntity<Producto> prod = productoService.buscarPorId(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
 
@@ -58,4 +66,10 @@ public class ProductoController {
         productoService.eliminarProducto(producto);
     }
 
+    @GetMapping("/categoria/{idCategoria}")
+    public ResponseEntity <Producto> buscarPorCategoria(@PathVariable Long idCategoria) {
+        return productoService.buscarPorCategoria(idCategoria)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
+    }
 }
