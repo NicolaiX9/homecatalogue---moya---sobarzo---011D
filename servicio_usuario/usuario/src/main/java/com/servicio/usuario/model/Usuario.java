@@ -23,7 +23,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private Long id;
-    private String rut;
+    private String run;
     private String email;
     private String nombre;
     private String password;

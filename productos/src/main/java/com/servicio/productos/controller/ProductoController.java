@@ -42,9 +42,9 @@ public class ProductoController {
             prod.getBody().setNombre(producto.getNombre());
             prod.getBody().setDescripcion(producto.getDescripcion());
             prod.getBody().setPrecio(producto.getPrecio());
-            prod.getBody().setId(producto.getId());
             
-            productoService.crearProducto(producto);
+            
+            productoService.crearProducto(prod.getBody());
 
             return ResponseEntity.ok(producto);
             

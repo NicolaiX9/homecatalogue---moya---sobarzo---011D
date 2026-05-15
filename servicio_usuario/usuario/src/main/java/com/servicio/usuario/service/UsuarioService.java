@@ -36,6 +36,8 @@ public class UsuarioService {
     
     }
 
-
+    public Optional<Usuario> encontrarPorRun(String run){
+      return usuarioRepository.findByRun(run);
+    }
 
 }
