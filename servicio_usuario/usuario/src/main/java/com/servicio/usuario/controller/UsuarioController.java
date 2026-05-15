@@ -20,7 +20,7 @@ import com.servicio.usuario.service.UsuarioService;
 
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/v1/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -45,7 +45,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void>eliminar(@PathVariable Long id){
-        //El build() llama al constructor
+        usuarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 

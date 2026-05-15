@@ -22,7 +22,7 @@ public class AlmacenService {
         return almacenRepository.save(almacen);
     }
 
-    public void borrarAlmacen(Almacen almacen){
-        almacenRepository.delete(almacen);
+    public void eliminarAlmacen(Long id){
+        almacenRepository.deleteById(id);
     }
 }

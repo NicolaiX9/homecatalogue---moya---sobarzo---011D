@@ -57,8 +57,8 @@ public class CarritoService {
         return carritoRepository.findAll();
     }
 
-    public void eliminarCarrito(Carrito carrito){
-        carritoRepository.delete(carrito);
+    public void eliminarCarrito(Long id){
+        carritoRepository.deleteById(id);
     }
 
     public Carrito obtenerDatosUsuario(Carrito carrito){

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.servicio.productos.model.Producto;
+import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.repository.ProductoRepository;
 
 @Service
@@ -27,12 +28,12 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public void eliminarProducto(Producto producto){
-        productoRepository.delete(producto);
+    public void eliminarProducto(Long id){
+        productoRepository.deleteById(id);
     }
 
-     public Optional<Producto> buscarPorCategoria(Long idCategoria){
-        return productoRepository.findByProductoCategoria(idCategoria);
+     public List<Producto> buscarPorCategoria(ProductoCategoria categoria){
+        return productoRepository.findByProductoCategoria(categoria);
     }
 
 }

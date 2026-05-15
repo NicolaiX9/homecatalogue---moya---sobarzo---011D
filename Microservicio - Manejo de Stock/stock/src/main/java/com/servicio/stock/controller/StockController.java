@@ -3,6 +3,7 @@ package com.servicio.stock.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,8 +55,9 @@ public class StockController {
 
 
     @DeleteMapping("/{id}")
-    public void eliminar(Stock stock){
-        stockService.eliminarStock(stock);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id){
+        stockService.eliminarStock(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

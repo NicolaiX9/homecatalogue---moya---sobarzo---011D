@@ -16,7 +16,7 @@ spring:
    - id: usuarios-service
      uri: http://localhost:9091
      predicates:
-      - Path=/usuarios/**
+      - Path=/api/v1/usuarios/**
 
 # RUTA PARA EL SERVICIO DE ALMACENES
    - id: almacenes-service
@@ -34,7 +34,7 @@ spring:
    - id: productos-service
      uri: http://localhost:9094
      predicates:
-     - Path=/productos/**
+     - Path=/api/v1/productos/**
 
 # RUTA PARA EL SERVICIO DE CARRITOS
    - id: carritos-service

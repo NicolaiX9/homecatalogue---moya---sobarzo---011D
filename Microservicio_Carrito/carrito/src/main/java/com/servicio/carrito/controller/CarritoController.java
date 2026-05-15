@@ -3,6 +3,7 @@ package com.servicio.carrito.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,8 +55,10 @@ public class CarritoController {
 
 
     @DeleteMapping("/{id}")
-    public void eliminar(Carrito carrito){
-        carritoService.eliminarCarrito(carrito);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id){
+        carritoService.eliminarCarrito(id);
+        return ResponseEntity.noContent().build();
+    
     }
 
     

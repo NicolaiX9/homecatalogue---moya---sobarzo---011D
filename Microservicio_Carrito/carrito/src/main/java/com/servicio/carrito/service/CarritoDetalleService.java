@@ -65,8 +65,8 @@ public class CarritoDetalleService {
         return carritoDetalleRepository.findAll();
     }
 
-    public void eliminarCarritoDetalle(CarritoDetalle carritoDetalle){
-        carritoDetalleRepository.delete(carritoDetalle);
+    public void eliminarCarritoDetalle(Long id){
+        carritoDetalleRepository.deleteById(id);
     }
 
     public CarritoDetalle obtenerDatosProducto(CarritoDetalle carritoDetalle){

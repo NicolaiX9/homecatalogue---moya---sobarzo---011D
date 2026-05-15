@@ -15,7 +15,7 @@ public class ProductoCategoriaService {
     @Autowired
     private ProductoCategoriaRepository productoCategoriaRepository;
 
-    public List<ProductoCategoria> listar(ProductoCategoria productoCategoria){
+    public List<ProductoCategoria> listar(){
         return productoCategoriaRepository.findAll();
     }
 
@@ -23,8 +23,8 @@ public class ProductoCategoriaService {
         return productoCategoriaRepository.save(productoCategoria);
     }
 
-    public void eliminar(ProductoCategoria productoCategoria){
-        productoCategoriaRepository.delete(productoCategoria);
+    public void eliminar(Long id){
+        productoCategoriaRepository.deleteById(id);
     }
 
 

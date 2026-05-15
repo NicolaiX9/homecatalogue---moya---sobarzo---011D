@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servicio.productos.model.Producto;
+import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.service.ProductoService;
 
 @RestController
-@RequestMapping("/productos")
+@RequestMapping("/api/v1/productos")
 public class ProductoController {
 
     @Autowired
@@ -28,7 +29,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto guardar(Producto producto){
+    public Producto guardar(@RequestBody Producto producto){
         return productoService.crearProducto(producto);
     }
 
@@ -62,14 +63,13 @@ public class ProductoController {
         }
     }
 
-    public void eliminar(Producto producto){
-        productoService.eliminarProducto(producto);
+    public ResponseEntity<Void> eliminar(@PathVariable Long id){
+        productoService.eliminarProducto(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/categoria/{idCategoria}")
-    public ResponseEntity <Producto> buscarPorCategoria(@PathVariable Long idCategoria) {
-        return productoService.buscarPorCategoria(idCategoria)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/filtrar_categoria/{id}")
+    public List<Producto> buscarPorCategoria(@RequestBody ProductoCategoria categoria) {
+        return productoService.buscarPorCategoria(categoria);
     }
 }

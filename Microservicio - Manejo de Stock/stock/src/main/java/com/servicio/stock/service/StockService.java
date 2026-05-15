@@ -55,8 +55,8 @@ public class StockService {
         return stockRepository.findAll();
     }
 
-    public void eliminarStock(Stock stock){
-        stockRepository.delete(stock);
+    public void eliminarStock(Long id){
+        stockRepository.deleteById(id);
     }
 
     public Stock obtenerDatosAlmacenProducto(Stock stock){

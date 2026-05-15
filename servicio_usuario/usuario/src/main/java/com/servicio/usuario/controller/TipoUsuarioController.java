@@ -17,7 +17,7 @@ import com.servicio.usuario.repository.TipoUsuarioRepository;
 
 
 @RestController
-@RequestMapping("/usuarios/tipos")
+@RequestMapping("/api/v1/tipos")
 public class TipoUsuarioController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class TipoUsuarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         tipoUsuarioRepository.deleteById(id);
-         return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build();
     }
 
 
