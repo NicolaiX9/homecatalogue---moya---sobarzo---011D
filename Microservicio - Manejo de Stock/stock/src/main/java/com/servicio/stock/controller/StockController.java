@@ -17,7 +17,7 @@ import com.servicio.stock.model.Stock;
 import com.servicio.stock.service.StockService;
 
 @RestController
-@RequestMapping("/stock")
+@RequestMapping("/api/v1/stock")
 public class StockController {
 
     @Autowired

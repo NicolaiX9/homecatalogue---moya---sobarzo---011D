@@ -17,7 +17,7 @@ import com.servicio.carrito.model.Carrito;
 import com.servicio.carrito.service.CarritoService;
 
 @RestController
-@RequestMapping("/carritos")
+@RequestMapping("/api/v1/carritos")
 public class CarritoController {
 
     @Autowired

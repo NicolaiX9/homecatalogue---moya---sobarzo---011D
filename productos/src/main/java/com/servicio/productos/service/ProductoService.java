@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.servicio.productos.model.Producto;
-import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.repository.ProductoRepository;
 
 @Service
@@ -32,8 +31,8 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-     public List<Producto> buscarPorCategoria(ProductoCategoria categoria){
-        return productoRepository.findByProductoCategoria(categoria);
+     public List<Producto> buscarPorCategoria(Long id){
+        return productoRepository.findByProductoCategoriaId(id);
     }
 
 }

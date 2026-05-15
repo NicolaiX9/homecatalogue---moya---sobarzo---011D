@@ -16,7 +16,7 @@ import com.servicio.almacenes.model.Almacen;
 import com.servicio.almacenes.service.AlmacenService;
 
 @RestController
-@RequestMapping("/almacenes")
+@RequestMapping("/api/v1/almacenes")
 public class AlmacenController {
 
     @Autowired

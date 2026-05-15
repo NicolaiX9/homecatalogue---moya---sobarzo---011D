@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.servicio.productos.model.Producto;
-import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.service.ProductoService;
 
 @RestController
@@ -68,8 +67,8 @@ public class ProductoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/filtrar_categoria/{id}")
-    public List<Producto> buscarPorCategoria(@RequestBody ProductoCategoria categoria) {
-        return productoService.buscarPorCategoria(categoria);
+    @GetMapping("/filtrarCategoria/{id}")
+    public List<Producto> buscarPorCategoria(@PathVariable Long id) {
+        return productoService.buscarPorCategoria(id);
     }
 }
