@@ -66,7 +66,7 @@ public class StockService {
                 Object Almacen = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9092/almacenes/" + stock.getIdAlmacen())
+                .uri("http://localhost:9092/api/v1/almacenes/" + stock.getIdAlmacen())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)

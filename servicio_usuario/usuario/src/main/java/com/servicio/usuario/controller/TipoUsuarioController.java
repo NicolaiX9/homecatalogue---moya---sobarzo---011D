@@ -17,7 +17,7 @@ import com.servicio.usuario.repository.TipoUsuarioRepository;
 
 
 @RestController
-@RequestMapping("/api/v1/tipos")
+@RequestMapping("/api/v1/usuarios/tipo")
 public class TipoUsuarioController {
 
     @Autowired

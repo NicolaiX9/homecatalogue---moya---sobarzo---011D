@@ -68,12 +68,12 @@ public class CarritoService {
                 Object usuario = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9091/usuarios/" + carrito.getIdUsuario())
+                .uri("http://localhost:9091/api/v1/usuarios/" + carrito.getIdUsuario())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
                 .block();
-
+                
                 carrito.setDatosUsuario(usuario);
                 } catch(Exception e){
 

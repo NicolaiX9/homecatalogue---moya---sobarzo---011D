@@ -32,7 +32,7 @@ public class ProductoCategoriaController {
         return productoCategoriaService.guardar(productoCategoria);
     }
 
-    @DeleteMapping("/{idCategoria}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         productoCategoriaService.eliminar(id);
         return ResponseEntity.noContent().build();

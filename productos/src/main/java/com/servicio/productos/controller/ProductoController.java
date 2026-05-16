@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,14 +48,13 @@ public class ProductoController {
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
 
-            prod.getBody().setNombre(producto.getNombre());
-            prod.getBody().setDescripcion(producto.getDescripcion());
+      
             prod.getBody().setPrecio(producto.getPrecio());
             
-            
+
             productoService.crearProducto(prod.getBody());
 
-            return ResponseEntity.ok(producto);
+            return ResponseEntity.ok(prod.getBody());
             
 
         } catch (Exception e){
@@ -62,6 +62,7 @@ public class ProductoController {
         }
     }
 
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         productoService.eliminarProducto(id);
         return ResponseEntity.noContent().build();

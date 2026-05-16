@@ -24,8 +24,8 @@ public class Usuario {
     
     private Long id;
     private String run;
-    private String email;
     private String nombre;
+    private String email;
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)

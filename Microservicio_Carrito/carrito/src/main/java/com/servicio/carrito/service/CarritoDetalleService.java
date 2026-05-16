@@ -76,7 +76,7 @@ public class CarritoDetalleService {
                 Object producto = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9095/productos/" + carritoDetalle.getIdProducto())
+                .uri("http://localhost:9095/api/v1/productos/" + carritoDetalle.getIdProducto())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
