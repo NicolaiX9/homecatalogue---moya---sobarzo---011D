@@ -26,13 +26,13 @@ public class CarritoDetalle {
     private Long id;
     
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="carrito_id")
-    private Carrito carrito;
-
     private Long idProducto;
 
     private int cantidad;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="carrito_id")
+    private Carrito carrito;
 
     @Transient
     private Object datosProducto;

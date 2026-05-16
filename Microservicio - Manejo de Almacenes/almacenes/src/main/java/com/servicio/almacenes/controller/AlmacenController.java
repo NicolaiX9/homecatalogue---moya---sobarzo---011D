@@ -27,6 +27,13 @@ public class AlmacenController {
         return almacenService.listar();
     }
 
+     @GetMapping("/{id}")
+    public ResponseEntity <Almacen> buscarPorId(@PathVariable Long id) {
+        return almacenService.buscarPorId(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public Almacen guardar(@RequestBody Almacen almacen){
         return almacenService.crearAlmacen(almacen);

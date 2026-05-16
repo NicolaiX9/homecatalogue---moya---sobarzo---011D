@@ -61,9 +61,27 @@ public class StockService {
 
     public Stock obtenerDatosAlmacenProducto(Stock stock){
 
-        if (stock.getId() != null){
+        if (stock.getIdProducto() != null){
             try{//la variable tipo Object evita que se caiga el programa
-                Object Almacen = webClientBuilder.build()
+                Object producto = webClientBuilder.build()
+                .get()
+                //el url no es local, el uri sí
+                .uri("http://localhost:9094/api/v1/productos/" + stock.getIdProducto())
+                .retrieve()
+                //el primer BodyToMono de la lista
+                .bodyToMono(Object.class)
+                .block();
+
+                stock.setDatosProducto(producto);
+                } catch(Exception e){
+
+                    //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
+                    stock.setDatosProducto("La información del producto no está disponible");
+                }
+            }
+        if(stock.getIdAlmacen() != null){
+            try{//la variable tipo Object evita que se caiga el programa
+                Object almacen = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
                 .uri("http://localhost:9092/api/v1/almacenes/" + stock.getIdAlmacen())
@@ -71,31 +89,15 @@ public class StockService {
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
                 .block();
-
-                stock.setDatosAlmacen(Almacen);
+                
+                stock.setDatosAlmacen(almacen);
                 } catch(Exception e){
 
                     //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
-                    stock.setDatosAlmacen("La información del almacen no está disponible");
+                    stock.setDatosAlmacen("La información del almacén no está disponible");
                 }
 
-                try{//la variable tipo Object evita que se caiga el programa
-                Object Producto = webClientBuilder.build()
-                .get()
-                //el url no es local, el uri sí
-                .uri("http://localhost:9094/productos/" + stock.getIdProducto())
-                .retrieve()
-                //el primer BodyToMono de la lista
-                .bodyToMono(Object.class)
-                .block();
-
-                stock.setDatosProducto(Producto);
-                } catch(Exception e){
-
-                    //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
-                    stock.setDatosProducto("La información del producto no está disponible");
-                }
-
+                
 
             
             }

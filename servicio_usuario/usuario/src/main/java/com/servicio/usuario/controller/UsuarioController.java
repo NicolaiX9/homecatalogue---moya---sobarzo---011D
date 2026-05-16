@@ -58,7 +58,7 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> modificar(@PathVariable Long id, @RequestBody Usuario usuario){
-       
+       try {
             ResponseEntity <Usuario> user = usuarioService.buscarPorId(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
@@ -70,7 +70,9 @@ public class UsuarioController {
             usuarioService.guardarUsuario(user.getBody());
 
             return user;
-            
+            } catch (Exception e){
+            return ResponseEntity.notFound().build();
+        } 
         
     }
     

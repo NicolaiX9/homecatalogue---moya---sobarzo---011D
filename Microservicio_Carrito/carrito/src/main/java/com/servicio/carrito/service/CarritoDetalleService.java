@@ -33,7 +33,8 @@ public class CarritoDetalleService {
             //El punto es un Elif
             .ifPresent(guardado::setCarrito);
         }
-        CarritoDetalle completo = carritoDetalleRepository.findById(guardado.getId()).orElse(guardado);
+        CarritoDetalle completo = carritoDetalleRepository.findById(guardado.getId())
+        .orElse(guardado);
 
 
         return obtenerDatosProducto(completo);
@@ -76,7 +77,7 @@ public class CarritoDetalleService {
                 Object producto = webClientBuilder.build()
                 .get()
                 //el url no es local, el uri sí
-                .uri("http://localhost:9095/api/v1/productos/" + carritoDetalle.getIdProducto())
+                .uri("http://localhost:9094/api/v1/productos/" + carritoDetalle.getIdProducto())
                 .retrieve()
                 //el primer BodyToMono de la lista
                 .bodyToMono(Object.class)
@@ -88,6 +89,24 @@ public class CarritoDetalleService {
                     //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
                     carritoDetalle.setDatosProducto("La información del producto no está disponible");
                 }
+
+            try{//la variable tipo Object evita que se caiga el programa
+                Object usuario = webClientBuilder.build()
+                .get()
+                //el url no es local, el uri sí
+                .uri("http://localhost:9091/api/v1/usuarios/" + carritoDetalle.getCarrito().getIdUsuario())
+                .retrieve()
+                //el primer BodyToMono de la lista
+                .bodyToMono(Object.class)
+                .block();
+                
+                carritoDetalle.getCarrito().setDatosUsuario(usuario);
+                } catch(Exception e){
+
+                    //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
+                    carritoDetalle.getCarrito().setDatosUsuario("La información del usuario no está disponible");
+                }
+
 
 
             
