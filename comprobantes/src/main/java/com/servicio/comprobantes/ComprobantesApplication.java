@@ -1,13 +1,13 @@
-package com.servicio.suministros;
+package com.servicio.comprobantes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SuministrosApplication {
+public class ComprobantesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SuministrosApplication.class, args);
+		SpringApplication.run(ComprobantesApplication.class, args);
 	}
 
 }

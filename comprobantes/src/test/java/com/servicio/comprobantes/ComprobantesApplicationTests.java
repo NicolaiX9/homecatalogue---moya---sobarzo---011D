@@ -1,10 +1,10 @@
-package com.servicio.suministros;
+package com.servicio.comprobantes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SuministrosApplicationTests {
+class ComprobantesApplicationTests {
 
 	@Test
 	void contextLoads() {
