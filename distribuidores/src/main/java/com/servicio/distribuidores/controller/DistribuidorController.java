@@ -44,16 +44,20 @@ public class DistribuidorController {
     @PutMapping("/{id}")
     public ResponseEntity<Distribuidor> modificar(@PathVariable Long id, @RequestBody Distribuidor distribuidor){
         try{
-            ResponseEntity<Distribuidor> sumi = distribuidorService.buscarPorId(id)
+            ResponseEntity<Distribuidor> distri = distribuidorService.buscarPorId(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
 
-            sumi.getBody().setCosto(distribuidor.getCosto());
-            sumi.getBody().setCantidad(distribuidor.getCantidad());
+            distri.getBody().setRutEmpresa(distri.getBody().getRutEmpresa());
+            distri.getBody().setRazonSocial(distri.getBody().getRazonSocial());
+            distri.getBody().setTelefono(distri.getBody().getTelefono());
+            distri.getBody().setEmail(distri.getBody().getEmail());
+            distri.getBody().setCalleDireccion(distri.getBody().getCalleDireccion());
+            distri.getBody().setNumeroDireccion(distri.getBody().getNumeroDireccion());
 
-            distribuidorService.guardarDistribuidor(sumi.getBody());
+            distribuidorService.guardarDistribuidor(distri.getBody());
 
-            return sumi;
+            return distri;
         } catch(Exception e) {
             return ResponseEntity.notFound().build();
         }

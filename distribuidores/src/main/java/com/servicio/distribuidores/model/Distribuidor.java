@@ -18,8 +18,10 @@ public class Distribuidor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idProducto;
-    private Long idDistribuidor;
-    private int costo;
-    private int cantidad;
+    private String rutEmpresa;
+    private String razonSocial;
+    private int telefono;
+    private String email;
+    private String calleDireccion;
+    private String numeroDireccion;
 }
