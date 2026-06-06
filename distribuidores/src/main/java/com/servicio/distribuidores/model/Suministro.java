@@ -8,12 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Suministro")
+@Table(name = "suministro")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +31,9 @@ public class Suministro {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="distribuidor_id")
     private Distribuidor distribuidor;
+
+    @Transient
+    private Object datosProducto;
 
 
 }

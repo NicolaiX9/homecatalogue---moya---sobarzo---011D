@@ -22,22 +22,19 @@ public class SuministroController {
     @Autowired
     private SuministroService suministroService;
 
-    @GetMapping("/{id}")
+    @GetMapping
     public List<Suministro> listar(){
         return suministroService.listar();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Suministro> buscarPorId(@PathVariable Long id){
-        return suministroService.buscarPorId(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    public Suministro buscarPorId(@PathVariable Long id){
+        return suministroService.buscarPorId(id);
     }
 
-    @PostMapping("/{id}")
-
+    @PostMapping
     public Suministro guardar(@RequestBody Suministro suministro){
-        return suministroService.guardarSuministro(suministro);
+        return suministroService.crearSuministro(suministro);
     }
 
     // @PutMapping("/{id}")
