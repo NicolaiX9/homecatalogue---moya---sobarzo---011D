@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,25 +36,25 @@ public class despachoController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Despacho> modificar (@PathVariable Long id, @RequestBody Despacho despacho ){
-        try{
-            ResponseEntity<Despacho> desp = despachoService.buscarPorId(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Despacho> modificar (@PathVariable Long id, @RequestBody Despacho despacho ){
+    //     try{
+    //         ResponseEntity<Despacho> desp = despachoService.buscarPorId(id)
+    //         .map(ResponseEntity::ok)
+    //         .orElse(ResponseEntity.notFound().build());
 
-            desp.getBody().setFechaDesp(despacho.getFechaDesp());
-            desp.getBody().setCalleDireccion(despacho.getCalleDireccion());
-            desp.getBody().setNumDireccion(despacho.getNumDireccion());
+    //         desp.getBody().setFechaDesp(despacho.getFechaDesp());
+    //         desp.getBody().setCalleDireccion(despacho.getCalleDireccion());
+    //         desp.getBody().setNumDireccion(despacho.getNumDireccion());
 
-            despachoService.guardarDespacho(desp.getBody());
+    //         despachoService.guardarDespacho(desp.getBody());
 
-            return desp;
+    //         return desp;
 
-        } catch (Exception e){
-            return ResponseEntity.notFound().build();
-        }
-    }
+    //     } catch (Exception e){
+    //         return ResponseEntity.notFound().build();
+    //     }
+    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@RequestBody Long id){

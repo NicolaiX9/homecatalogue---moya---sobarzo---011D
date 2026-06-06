@@ -1,6 +1,4 @@
-package com.servicio.despachos.model;
-
-import java.time.LocalDate;
+package com.servicio.distribuidores.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,17 +10,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "despacho")
+@Table(name = "Suministro")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Despacho {
+public class Suministro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate fechaDesp;
-    private String calleDireccion;
-    private int numDireccion;
-    private Long idVenta;
+    private Long idProducto;
+    private Long idDistribuidor;
+    private int costo;
+    private int cantidad;
 }
