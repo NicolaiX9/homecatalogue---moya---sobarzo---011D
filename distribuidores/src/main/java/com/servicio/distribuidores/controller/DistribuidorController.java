@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,28 +40,28 @@ public class DistribuidorController {
         return distribuidorService.guardarDistribuidor(distribuidor);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Distribuidor> modificar(@PathVariable Long id, @RequestBody Distribuidor distribuidor){
-        try{
-            ResponseEntity<Distribuidor> distri = distribuidorService.buscarPorId(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Distribuidor> modificar(@PathVariable Long id, @RequestBody Distribuidor distribuidor){
+    //     try{
+    //         ResponseEntity<Distribuidor> distri = distribuidorService.buscarPorId(id)
+    //         .map(ResponseEntity::ok)
+    //         .orElse(ResponseEntity.notFound().build());
 
-            distri.getBody().setRutEmpresa(distri.getBody().getRutEmpresa());
-            distri.getBody().setRazonSocial(distri.getBody().getRazonSocial());
-            distri.getBody().setTelefono(distri.getBody().getTelefono());
-            distri.getBody().setEmail(distri.getBody().getEmail());
-            distri.getBody().setCalleDireccion(distri.getBody().getCalleDireccion());
-            distri.getBody().setNumeroDireccion(distri.getBody().getNumeroDireccion());
+    //         distri.getBody().setRutEmpresa(distri.getBody().getRutEmpresa());
+    //         distri.getBody().setRazonSocial(distri.getBody().getRazonSocial());
+    //         distri.getBody().setTelefono(distri.getBody().getTelefono());
+    //         distri.getBody().setEmail(distri.getBody().getEmail());
+    //         distri.getBody().setCalleDireccion(distri.getBody().getCalleDireccion());
+    //         distri.getBody().setNumeroDireccion(distri.getBody().getNumeroDireccion());
 
-            distribuidorService.guardarDistribuidor(distri.getBody());
+    //         distribuidorService.guardarDistribuidor(distri.getBody());
 
-            return distri;
-        } catch(Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+    //         return distri;
+    //     } catch(Exception e) {
+    //         return ResponseEntity.notFound().build();
+    //     }
 
-    }
+    // }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
