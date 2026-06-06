@@ -19,7 +19,7 @@ import com.servicio.stock.service.StockService;
 @RestController
 @RequestMapping("/api/v1/stock")
 public class StockController {
-
+    
     @Autowired
     private StockService stockService;
 
