@@ -72,7 +72,7 @@ public class VentaService {
                 .bodyToMono(Object.class)
                 .block();
 
-                venta.setDatosCarrito(venta);
+                venta.setDatosCarrito(carrito);
                 } catch(Exception e){
 
                     //tienes que borrar la e y apretar comillar para que aparezca "datos pacientes"
