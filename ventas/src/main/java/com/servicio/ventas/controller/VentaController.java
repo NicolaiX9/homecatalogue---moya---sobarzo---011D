@@ -20,7 +20,7 @@ import com.servicio.ventas.service.VentaService;
 public class VentaController {
 
 
-     @Autowired
+    @Autowired
     private VentaService ventaService;
 
 
