@@ -1,11 +1,12 @@
 package com.hospital.service_auth.filter;
 
 import org.springframework.stereotype.Component;
-
 import lombok.Value;
 
 @Component
-public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config>{
+public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> 
+{
+
 
     @Value("${jwt.secret}")
     private String secreto;
