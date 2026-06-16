@@ -8,6 +8,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,23 +31,16 @@ public class AlmacenServiceTest {
     // ------- Creacion de metodos de prueba -------
 
     // metodo de buscar por id
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Test
+    @DisplayName("Deberia buscar un almacen por ID correctamente")
+    void buscarPorId(){
+        Long id = 1L;
+        Almacen almock = new Almacen();
+        almock.setId(id);
+        when(almacenRepository).findById(id).thenReturn(Optional.of(almock));
+        Almacen resultado = almacenService.buscarPorId(id);
+        verify(almacenRepository, times(1)).findById(id);
+    }
 
     @Test
     @DisplayName("Deberia guardar el almacen correctamente")
