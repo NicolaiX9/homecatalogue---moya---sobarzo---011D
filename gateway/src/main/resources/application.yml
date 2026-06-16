@@ -3,7 +3,8 @@
 
 server:
  port: 9080
-
+jwt:
+  secret: "493358340235739058340598340598340598340598340598"
 spring: 
  application:
   name: api-gateway
