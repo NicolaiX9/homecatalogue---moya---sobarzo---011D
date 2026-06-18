@@ -38,14 +38,14 @@ public class AlmacenServiceTest {
     @DisplayName("Deberia buscar un almacen por ID correctamente")
     void buscarPorIdTest(){
         Long id = 1L;
-        Almacen almock = new Almacen();
-        almock.setId(id);
-        almock.setCalleDireccion("Av. Pajaritos");
-        almock.setNumeroDireccion("1234");
-        when(almacenRepository.findById(id)).thenReturn(Optional.of(almock));
-        Optional<Almacen> resultado = almacenService.buscarPorId(id);
-        assertTrue(resultado.isPresent());
-        Almacen resultado = resultado.getId();
+        Almacen alm = new Almacen();
+        alm.setId(id);
+        alm.setCalleDireccion("Av. Pajaritos");
+        alm.setNumeroDireccion("1234");
+        when(almacenRepository.findById(id)).thenReturn(Optional.of(alm));
+        Optional <Almacen> resultadoOptional = almacenService.buscarPorId(id);
+        assertTrue(resultadoOptional.isPresent());
+        Almacen resultado = resultadoOptional.get();
         
         assertNotNull(resultado);
         assertEquals(id, resultado.getId());
