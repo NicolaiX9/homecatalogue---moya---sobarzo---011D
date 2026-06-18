@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.hospital.service_auth.dto.AuthRequest;
 import com.hospital.service_auth.model.Usuario;
 import com.hospital.service_auth.service.AuthService;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Autenticación", description = "Endpoints para registro y login de usuario")

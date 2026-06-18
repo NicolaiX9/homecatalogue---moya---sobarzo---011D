@@ -77,7 +77,7 @@ spring:
       - id: transportistas-service
         uri: http://localhost:9099
         predicates:
-        - Path=/transportistas/**
+        - Path=/api/v1/transportistas/**
 
       # RUTA PARA EL SERVICIO DE VENTAS
       - id: ventas-service
