@@ -2,12 +2,15 @@ package com.servicio.almacenes.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
@@ -33,13 +36,37 @@ public class AlmacenServiceTest {
     // metodo de buscar por id
     @Test
     @DisplayName("Deberia buscar un almacen por ID correctamente")
-    void buscarPorId(){
+    void buscarPorIdTest(){
         Long id = 1L;
         Almacen almock = new Almacen();
         almock.setId(id);
-        when(almacenRepository).findById(id).thenReturn(Optional.of(almock));
-        Almacen resultado = almacenService.buscarPorId(id);
+        almock.setCalleDireccion("Av. Pajaritos");
+        almock.setNumeroDireccion("1234");
+        when(almacenRepository.findById(id)).thenReturn(Optional.of(almock));
+        Optional<Almacen> resultado = almacenService.buscarPorId(id);
+        assertTrue(resultado.isPresent());
+        Almacen resultado = resultado.getId();
+        
+        assertNotNull(resultado);
+        assertEquals(id, resultado.getId());
+        assertEquals("Av. Pajaritos", resultado.getCalleDireccion());
+        assertEquals("1234", resultado.getNumeroDireccion());
         verify(almacenRepository, times(1)).findById(id);
+    }
+    
+    @Test
+    @DisplayName("Deberia listar los almacenes correctamente")
+    void listartodosTest(){
+        Almacen alma = new Almacen();
+        alma.setCalleDireccion("Gran Avenida");
+        alma.setNumeroDireccion("5566");
+        List<Almacen> listaMock = List.of(alma);
+        when(almacenRepository.findAll()).thenReturn(listaMock);
+        List<Almacen> resultado = almacenService.listar();
+        assertNotNull(resultado);
+        assertEquals("Gran Avenida", resultado.get(0).getCalleDireccion());
+        assertEquals("5566", resultado.get(0).getNumeroDireccion());
+        verify(almacenRepository, times(1)).findAll();
     }
 
     @Test
@@ -61,6 +88,38 @@ public class AlmacenServiceTest {
     assertEquals("Pajaritos", resultado.getCalleDireccion());
     verify(almacenRepository, times(1)).save(almacen);
     }
+
+    // // metodo de actualizar
+    // void actualizarAlmacenTest(){
+    //     Long id = 1L;
+    //     Almacen almaActu = new Almacen();
+    //     almaActu.setId(id);
+    //     almaActu.setCalleDireccion("Calle Vieja");
+    //     almaActu.setNumeroDireccion("2222");
+
+    //     Almacen datosNuevos = new Almacen();
+    //     datosNuevos.setCalleDireccion("Calle Nueva");
+    //     datosNuevos.setNumeroDireccion("2222");
+        
+    //     // buscamos si existe
+    //     when(almacenRepository.findById(id)).thenReturn(Optional.of(almaActu));
+    //     // guardar cambios y retornar lo q esta guardando
+    //     when(almacenRepository.save(any(Almacen.class))).thenAnswer(invocation -> {
+    //         Almacen a = invocation.getArgument(0);
+    //         return a;
+    //     });
+    //     Almacen resultado = almacenService.ac
+
+    //     // verificacion
+    //     assertNotNull(resultado);
+    //     assertEquals("Calle Nueva", resultado.getCalleDireccion());
+    //     assertEquals("2222", resultado.getNumeroDireccion());
+    //     verify(almacenRepository, times(1)).findById(id);
+    //     verify(almacenRepository, times(1)).save(any(Almacen.class));
+    // }
+
+
+
 
     // metodo del eliminar = delete
     @Test
