@@ -3,7 +3,8 @@
 
 server:
  port: 9080
-
+jwt:
+  secret: "493358340235739058340598340598340598340598340598"
 spring: 
  application:
   name: api-gateway
@@ -53,6 +54,42 @@ spring:
         uri: http://localhost:9095
         predicates:
         - Path=/api/v1/carritos/**
+      
+      # RUTA PARA EL SERVICIO DE COMPROBANTES
+      - id: comprobantes-service
+        uri: http://localhost:9096
+        predicates:
+        - Path=/api/v1/comprobantes/**
+      
+      # RUTA PARA EL SERVICIO DE DISTRIBUIDORES
+      - id: distribuidores-service
+        uri: http://localhost:9097
+        predicates:
+        - Path=/api/v1/distribuidor/**
+      
+      # RUTA PARA EL SERVICIO DE DESPACHOS
+      - id: despachos-service
+        uri: http://localhost:9098
+        predicates:
+        - Path=/api/v1/despacho/**
+
+      # RUTA PARA EL SERVICIO DE TRANSPORTISTAS
+      - id: transportistas-service
+        uri: http://localhost:9099
+        predicates:
+        - Path=/transportistas/**
+
+      # RUTA PARA EL SERVICIO DE VENTAS
+      - id: ventas-service
+        uri: http://localhost:9100
+        predicates:
+        - Path=/api/v1/ventas/**
+
+       # RUTA PARA EL SERVICIO DE AUTENTICACIÓN
+      - id: authentication-service
+        uri: http://localhost:9101
+        predicates:
+        - Path="/auth/**
 
 eureka:
    client:
@@ -60,13 +97,21 @@ eureka:
       fetch-registry: false
 
 springdoc:
-  swagger-ui
+  swagger-ui:
     urls:
       - name: Servicio Usuarios 
         url: /api/v1/usuarios/**
-      - name Servicio almacenes
+      - name: Servicio almacenes
         url: /api/v1/almacenes/**   
-      - name Servicio Stock
+      - name: Servicio Stock
         url: /api/v1/stock/**
-      - name Servicio Carritos
+      - name: Servicio Carritos
         url: /api/v1/carritos/**
+
+logging:
+
+  level:
+
+    org.springframework.cloud.gateway: TRACE
+
+    org.springframework.http.server.reactive: DEBUG

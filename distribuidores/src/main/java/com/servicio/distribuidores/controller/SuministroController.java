@@ -17,7 +17,7 @@ import com.servicio.distribuidores.model.Suministro;
 import com.servicio.distribuidores.service.SuministroService;
 
 @RestController
-@RequestMapping("/api/v1/suministro")
+@RequestMapping("/api/v1/distribuidor/suministro")
 public class SuministroController {
     @Autowired
     private SuministroService suministroService;
