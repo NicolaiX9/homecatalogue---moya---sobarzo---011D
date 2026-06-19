@@ -21,11 +21,11 @@ spring:
              - PUT
              - DELETE
              - OPTIONS
-           allowedHeaders:
+           allowedHeaders: "*"
 
    routes:
 
-      # RUTA PARA EL SERVICIO DE USUARIOS
+      # RUTA PARA LOS DATOS DEL SERVICIO DE USUARIOS
       - id: usuarios-service
         uri: http://localhost:9091
         predicates:
@@ -65,13 +65,13 @@ spring:
       - id: distribuidores-service
         uri: http://localhost:9097
         predicates:
-        - Path=/api/v1/distribuidor/**
+        - Path=/api/v1/distribuidores/**
       
       # RUTA PARA EL SERVICIO DE DESPACHOS
       - id: despachos-service
         uri: http://localhost:9098
         predicates:
-        - Path=/api/v1/despacho/**
+        - Path=/api/v1/despachos/**
 
       # RUTA PARA EL SERVICIO DE TRANSPORTISTAS
       - id: transportistas-service
@@ -89,7 +89,7 @@ spring:
       - id: authentication-service
         uri: http://localhost:9101
         predicates:
-        - Path="/auth/**
+        - Path=/auth/**
 
 eureka:
    client:
@@ -100,13 +100,13 @@ springdoc:
   swagger-ui:
     urls:
       - name: Servicio Usuarios 
-        url: /api/v1/usuarios/**
+        url: /api/v1/usuarios/v3/api-docs
       - name: Servicio almacenes
-        url: /api/v1/almacenes/**   
+        url: /api/v1/almacenes/v3/api-docs  
       - name: Servicio Stock
-        url: /api/v1/stock/**
+        url: /api/v1/stock/v3/api-docs
       - name: Servicio Carritos
-        url: /api/v1/carritos/**
+        url: /api/v1/carritos/v3/api-docs
 
 logging:
 

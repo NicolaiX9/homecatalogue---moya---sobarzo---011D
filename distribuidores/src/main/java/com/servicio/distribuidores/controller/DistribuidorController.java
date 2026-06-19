@@ -18,7 +18,7 @@ import com.servicio.distribuidores.service.DistribuidorService;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/distribuidor")
+@RequestMapping("/api/v1/distribuidores")
 public class DistribuidorController {
     
     @Autowired

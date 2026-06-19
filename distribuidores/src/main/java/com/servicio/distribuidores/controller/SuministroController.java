@@ -19,7 +19,7 @@ import com.servicio.distribuidores.service.SuministroService;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/distribuidor/suministro")
+@RequestMapping("/api/v1/distribuidores/suministro")
 public class SuministroController {
     @Autowired
     private SuministroService suministroService;

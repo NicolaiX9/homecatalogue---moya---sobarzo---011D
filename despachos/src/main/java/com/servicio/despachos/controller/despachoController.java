@@ -19,7 +19,7 @@ import com.servicio.despachos.service.DespachoService;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/despacho")
+@RequestMapping("/api/v1/despachos")
 public class despachoController {
     
     @Autowired
