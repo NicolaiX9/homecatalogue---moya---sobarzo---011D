@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.usuario.model.Usuario;
 import com.servicio.usuario.service.UsuarioService;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/usuarios")
-@Schema(description = "Modelo que representa un usuario en el sistema")
+@Tag(name = "Usuarios", description = "Operaciones relacionadas con la gestión de usuarios")
 public class UsuarioController {
 
     @Autowired

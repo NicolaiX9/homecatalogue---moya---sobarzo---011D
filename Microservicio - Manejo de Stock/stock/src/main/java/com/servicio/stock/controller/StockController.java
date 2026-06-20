@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.stock.model.Stock;
 import com.servicio.stock.service.StockService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/stock")
+@Tag(name = "Stock", description = "Operaciones relacionadas con la gestión de stock")
 public class StockController {
     
     @Autowired

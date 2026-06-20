@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.carrito.model.CarritoDetalle;
 import com.servicio.carrito.service.CarritoDetalleService;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/carritos/carritosdetalle")
-
+@Tag(name = "Detalle de carritos", description = "Operaciones relacionadas con la gestión del detalle de los carritos")
 public class CarritoDetalleController {
 
     @Autowired
