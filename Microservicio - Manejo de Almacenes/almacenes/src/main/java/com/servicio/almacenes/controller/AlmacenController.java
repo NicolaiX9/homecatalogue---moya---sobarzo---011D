@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/almacenes")
-@Schema(description = "Modelo que representa un almacén en el sistema")
+
 public class AlmacenController {
 
     @Autowired

@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/carritos/carritosdetalle")
-@Schema(description = "Modelo que representa los detalles de un carrito en el sistema")
+
 public class CarritoDetalleController {
 
     @Autowired

@@ -2,6 +2,7 @@ package com.servicio.carrito.model;
 
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Schema(description = "Modelo que representa un carrito en el sistema")
 public class Carrito {
 
     @Id

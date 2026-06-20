@@ -1,5 +1,6 @@
 package com.servicio.productos.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "Modelo que representa una categoría de producto en el sistema")
 public class ProductoCategoria {
 
     @Id

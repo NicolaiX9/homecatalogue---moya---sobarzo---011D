@@ -2,6 +2,7 @@ package com.servicio.ventas.model;
 
 import java.time.LocalDate;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "venta")
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "Modelo que representa una venta en el sistema")
 public class Venta {
 
 

@@ -18,11 +18,12 @@ import com.servicio.carrito.model.Carrito;
 import com.servicio.carrito.service.CarritoService;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/carritos")
-@Schema(description = "Modelo que representa un carrito en el sistema")
+@Tag(name = "Carritos", description = "Operaciones relacionadas con la gestión de carritos")
 public class CarritoController {
 
     @Autowired
