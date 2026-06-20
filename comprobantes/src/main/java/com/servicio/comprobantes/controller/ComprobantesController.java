@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.comprobantes.model.Comprobantes;
 import com.servicio.comprobantes.service.ComprobantesService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/comprobantes")
+@Schema(description = "Modelo que representa un comprobante en el sistema")
 public class ComprobantesController {
 
     @Autowired

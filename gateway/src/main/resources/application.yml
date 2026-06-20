@@ -107,6 +107,16 @@ springdoc:
         url: /api/v1/stock/v3/api-docs
       - name: Servicio Carritos
         url: /api/v1/carritos/v3/api-docs
+      - name: Servicio Ventas
+        url: /api/v1/ventas/v3/api-docs
+      - name: Servicio Despachos
+        url: /api/v1/despachos/v3/api-docs
+      - name: Servicio Comprobantes
+        url: /api/v1/comprobantes/v3/api-docs
+      - name: Servicio Transportistas
+        url: /api/v1/transportistas/v3/api-docs
+      - name: Servicio Distribuidores
+        url: /api/v1/distribuidores/v3/api-docs
 
 logging:
 

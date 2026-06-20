@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.distribuidores.model.Distribuidor;
 import com.servicio.distribuidores.service.DistribuidorService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/distribuidores")
+@Schema(description = "Modelo que representa un distribuidor en el sistema")
 public class DistribuidorController {
     
     @Autowired

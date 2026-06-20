@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.usuario.model.TipoUsuario;
 import com.servicio.usuario.repository.TipoUsuarioRepository;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/usuarios/tipo")
+@Schema(description = "Modelo que representa un tipo de usuario en el sistema")
 public class TipoUsuarioController {
 
     @Autowired

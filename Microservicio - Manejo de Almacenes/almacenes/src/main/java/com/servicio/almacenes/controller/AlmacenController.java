@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.almacenes.model.Almacen;
 import com.servicio.almacenes.service.AlmacenService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/almacenes")
+@Schema(description = "Modelo que representa un almacén en el sistema")
 public class AlmacenController {
 
     @Autowired

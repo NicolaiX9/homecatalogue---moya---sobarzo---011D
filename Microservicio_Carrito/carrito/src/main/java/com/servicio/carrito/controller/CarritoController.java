@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.carrito.model.Carrito;
 import com.servicio.carrito.service.CarritoService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/carritos")
+@Schema(description = "Modelo que representa un carrito en el sistema")
 public class CarritoController {
 
     @Autowired

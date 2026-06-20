@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.despachos.model.Despacho;
 import com.servicio.despachos.service.DespachoService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/despachos")
+@Schema(description = "Modelo que representa un despacho en el sistema")
 public class despachoController {
     
     @Autowired

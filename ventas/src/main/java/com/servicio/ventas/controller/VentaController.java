@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.ventas.model.Venta;
 import com.servicio.ventas.service.VentaService;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/ventas")
+@Schema(description = "Modelo que representa una venta en el sistema")
 public class VentaController {
 
 
