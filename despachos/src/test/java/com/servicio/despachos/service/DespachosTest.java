@@ -2,6 +2,7 @@ package com.servicio.despachos.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -49,6 +50,29 @@ public class DespachosTest {
         verify(despachoRepository, times(1)).findAll();
     }
 
+    @Test
+    @DisplayName("Deberia guardar el despacho correctamemte")
+    void guardarDespachoTest(){
+        Despacho despacho =  new Despacho();
+        despacho.setFechaDesp(LocalDate.now());
+        despacho.setCalleDireccion("Silva Carvallo");
+        despacho.setNumDireccion(1122);
+        despacho.setIdVenta(1L);
+        when(despachoRepository.save(any(Despacho.class))).thenAnswer(invocation -> {
+            Despacho a = invocation.getArgument(0);
+            a.setId(1L);
+            return a;
+        });
+    
+    Despacho resultado = despachoService.guardarDespacho(despacho);
+    assertNotNull(resultado);
+    assertEquals(1L, resultado.getId());
+    assertEquals(LocalDate.now(), resultado.getFechaDesp());
+    assertEquals("Silva Carvallo", resultado.getCalleDireccion());
+    assertEquals(1122, resultado.getNumDireccion());
+    assertEquals(1L, resultado.getIdVenta());
+    verify(despachoRepository, times(1)).save(despacho);
+    }
 
     @Test
     @DisplayName("Deberia eliminar el despacho correctamente")
