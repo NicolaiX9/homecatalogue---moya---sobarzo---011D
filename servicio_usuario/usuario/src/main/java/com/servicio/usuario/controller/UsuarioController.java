@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.usuario.model.Usuario;
 import com.servicio.usuario.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
@@ -30,12 +31,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;    
 
-
+    @Operation(summary = "Obtener todos los usuarios", description ="Retorna una lista completa de los usuarios")
     @GetMapping
     public List <Usuario> listar(){
         return usuarioService.listarUsuarios();
     }
 
+    @Operation(summary = "Obtener un usuario mediante su Id", description ="Retorna el usuario cuya Id coincide con la ingresada")
     @GetMapping("/{id}")
     public ResponseEntity <Usuario> buscarPorId(@PathVariable Long id) {
         return usuarioService.buscarPorId(id)
@@ -43,16 +45,19 @@ public class UsuarioController {
         .orElse(ResponseEntity.notFound().build());
     }
     
+    @Operation(summary = "Crear un usuario", description ="Crea un usuario en base a los datos ingresados")
     @PostMapping ResponseEntity <Usuario> guardar(@RequestBody Usuario usuario){
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuario));
     }
 
+    @Operation(summary = "Borrar un usuario", description ="Borra el usuario cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void>eliminar(@PathVariable Long id){
         usuarioService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Operation(summary = "Obtener un usuario mediante su run", description ="Retorna el usuario cuyo run coincide con el ingresado")
     @GetMapping("/run/{run}")
     public ResponseEntity<Usuario> buscarPorRun(@PathVariable String run){
       return usuarioService.encontrarPorRun(run)
@@ -60,6 +65,7 @@ public class UsuarioController {
       .orElse(ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Actualizar un usuario", description ="Actualiza un usuario en base a los datos ingresados")
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> modificar(@PathVariable Long id, @RequestBody Usuario usuario){
        try {

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.usuario.model.TipoUsuario;
 import com.servicio.usuario.repository.TipoUsuarioRepository;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -28,16 +28,18 @@ public class TipoUsuarioController {
     @Autowired
     private TipoUsuarioRepository tipoUsuarioRepository;
     
-
+    @Operation(summary = "Obtener todos los tipos de usuarios", description ="Retorna una lista completa de los tipos de usuarios")
     @GetMapping
     public List <TipoUsuario> listar(){
         return tipoUsuarioRepository.findAll();
     }
     
+    @Operation(summary = "Crear un tipo de usuario", description ="Crea un tipo de usuario en base a los datos ingresados")
     @PostMapping TipoUsuario guardar(@RequestBody TipoUsuario tipo){
         return tipoUsuarioRepository.save(tipo);
     }
 
+    @Operation(summary = "Borrar un tipo de usuario", description ="Borra el tipo de usuario cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         tipoUsuarioRepository.deleteById(id);

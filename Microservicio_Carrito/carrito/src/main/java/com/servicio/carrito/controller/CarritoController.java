@@ -35,19 +35,19 @@ public class CarritoController {
         return carritoService.listar();
     }
 
-    @Operation(summary = "Obtener un carrito en base a su Id", description ="Retorna el carrito que posee el Id ingresado por el usuario")
+    @Operation(summary = "Obtener un carrito mediante su Id", description ="Retorna el carrito cuyo Id coincide con el ingresado")
     @GetMapping("/{id}")
     public Carrito buscarPorId(@PathVariable Long id){
         return carritoService.buscarPorId(id);
     }
 
-    @Operation(summary = "Crear un carrito", description ="Crea un carrito en base a los datos ingresados por el usuario")
+    @Operation(summary = "Crear un carrito", description ="Crea un carrito en base a los datos ingresados")
     @PostMapping
     public Carrito guardar(@RequestBody Carrito carrito){
         return carritoService.crearCarrito(carrito);
     }
 
-    @Operation(summary = "Actualizar un carrito", description ="Actualiza un carrito en base a los datos ingresados por el usuario")
+    @Operation(summary = "Actualizar un carrito", description ="Actualiza un carrito en base a los datos ingresados")
     @PutMapping("/{id}")
     public Carrito modificar(@PathVariable Long id, @RequestBody Carrito carrito){
        
@@ -63,7 +63,7 @@ public class CarritoController {
         
     }
 
-    @Operation(summary = "Borrar un carrito", description ="Borra el carrito cuya Id coincida con la que fue ingresada como parámetro")
+    @Operation(summary = "Borrar un carrito", description ="Borra el carrito cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         carritoService.eliminarCarrito(id);

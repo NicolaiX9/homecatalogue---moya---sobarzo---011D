@@ -36,7 +36,7 @@ public class AlmacenController {
         return almacenService.listar();
     }
 
-    @Operation(summary = "Obtener un almacén en base a su Id", description ="Retorna el almacen que posee el Id ingresado en el método")
+    @Operation(summary = "Obtener un almacén mediante su Id", description ="Retorna el almacen cuyo Id coincide con el ingresado")
     @GetMapping("/{id}")
     public ResponseEntity <Almacen> buscarPorId(@PathVariable Long id) {
         return almacenService.buscarPorId(id)
@@ -44,13 +44,13 @@ public class AlmacenController {
         .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Crear un almacén", description ="Crea un almacén en base a los datos ingresados por el usuario")
+    @Operation(summary = "Crear un almacén", description ="Crea un almacén en base a los datos ingresados")
     @PostMapping
     public Almacen guardar(@RequestBody Almacen almacen){
         return almacenService.crearAlmacen(almacen);
     }
 
-    @Operation(summary = "Borrar un almacén", description ="Borra el almacén cuya Id coincida con la que fue ingresada como parámetro")
+    @Operation(summary = "Borrar un almacén", description ="Borra el almacén cuya Id coincida con la que fue ingresada")
     @DeleteMapping("{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         almacenService.eliminarAlmacen(id);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.ventas.model.Venta;
 import com.servicio.ventas.service.VentaService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -29,17 +30,19 @@ public class VentaController {
     @Autowired
     private VentaService ventaService;
 
-
+    @Operation(summary = "Obtener todas las ventas", description ="Retorna una lista completa de las ventas")
     @GetMapping
     public List<Venta> listar(){
         return ventaService.listar();
     }
 
+    @Operation(summary = "Obtener una venta mediante su Id", description ="Retorna la venta cuya Id coincide con la ingresada")
     @GetMapping("/{id}")
     public Venta buscarPorId(@PathVariable Long id){
         return ventaService.buscarPorId(id);
     }
 
+    @Operation(summary = "Crear una venta", description ="Crea una venta en base a los datos ingresados")
     @PostMapping
     public Venta guardar(@RequestBody Venta venta){
         return ventaService.crearVenta(venta);
@@ -47,7 +50,7 @@ public class VentaController {
 
 
 
-
+    @Operation(summary = "Borrar una venta", description ="Borra la venta cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         ventaService.eliminarVenta(id);
