@@ -61,6 +61,16 @@
             "projectName": "stock",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ServiceAuthApplication<service-auth>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.hospital.service_auth.ServiceAuthApplication",
+            "projectName": "service-auth",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

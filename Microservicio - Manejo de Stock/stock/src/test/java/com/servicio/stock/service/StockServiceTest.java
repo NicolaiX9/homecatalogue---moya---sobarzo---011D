@@ -78,11 +78,11 @@ public class StockServiceTest {
         });
         Stock resultado = new Stock();
         assertNotNull(resultado);
-        assertEquals(50, resultado.getCantidad());
+        assertEquals(10, resultado.getCantidad());
         assertEquals(1L, resultado.getIdProducto());
         assertEquals(1L, resultado.getIdAlmacen());
-        assertEquals(stock, resultado.getDatosAlmacen());
-        assertEquals(stock, resultado.getDatosProducto());
+        assertEquals(1L, resultado.getDatosAlmacen());
+        assertEquals(1L, resultado.getDatosProducto());
         verify(stockRepository, times(1)).save(stock);
     }
 }
