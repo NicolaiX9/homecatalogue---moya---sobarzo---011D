@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicio.stock.dto.StockDTO;
 import com.servicio.stock.model.Stock;
 import com.servicio.stock.service.StockService;
 
@@ -31,13 +32,13 @@ public class StockController {
 
     @Operation(summary = "Obtener todos los stocks", description ="Retorna una lista completa de los stocks")
     @GetMapping
-    public List<Stock> listar(){
+    public List<StockDTO> listar(){
         return stockService.listar();
     }
 
     @Operation(summary = "Obtener un stock mediante su Id", description ="Retorna el stock cuya Id coincide con la ingresada")
     @GetMapping("/{id}")
-    public Stock buscarPorId(@PathVariable Long id){
+    public StockDTO buscarPorId(@PathVariable Long id){
         return stockService.buscarPorId(id);
     }
 
@@ -51,7 +52,7 @@ public class StockController {
     @PutMapping("/{id}")
     public Stock modificar(@PathVariable Long id, @RequestBody Stock stock){
        
-           Stock sto = stockService.buscarPorId(id);
+           StockDTO sto = stockService.buscarPorId(id);
             
             sto.setCantidad(stock.getCantidad());            
             
