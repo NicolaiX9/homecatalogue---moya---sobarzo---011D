@@ -23,12 +23,18 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int cantidad;
+
+    @Schema(description = "Id del producto del microservicio de gestión de productos.")
     private Long idProducto;
+
+    @Schema(description = "Id del almacén del microservicio de gestión de almacenes.")
     private Long idAlmacen;
 
+    @Schema(description = "Datos detallados del producto. Se cargan en tiempo de ejecución via WebClient", accessMode = Schema.AccessMode.READ_ONLY)
     @Transient
     private Object datosProducto;
 
+    @Schema(description = "Datos detallados del almacén. Se cargan en tiempo de ejecución via WebClient", accessMode = Schema.AccessMode.READ_ONLY)
     @Transient
     private Object datosAlmacen;
     

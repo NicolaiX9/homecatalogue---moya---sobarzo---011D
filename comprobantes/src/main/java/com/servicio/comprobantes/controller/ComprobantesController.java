@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.comprobantes.model.Comprobantes;
 import com.servicio.comprobantes.service.ComprobantesService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -28,11 +29,13 @@ public class ComprobantesController {
     @Autowired
     private ComprobantesService comprobantesService;
 
+    @Operation(summary = "Obtener todos los comprobantes", description ="Retorna una lista completa de los comprobantes")
     @GetMapping
     public List<Comprobantes> listar(){
         return comprobantesService.listar();
     }
 
+    @Operation(summary = "Crear un comprobante", description ="Crea un comprobante en base a los datos ingresados por el usuario")
     @PostMapping("/{id}")
     public ResponseEntity<Comprobantes> crear(@PathVariable Long id){
         return comprobantesService.buscarPorId(id)
@@ -40,6 +43,7 @@ public class ComprobantesController {
         .orElse(ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Borrar un comprobante", description ="Borra el comprobante cuya Id coincida con la que fue ingresada como parámetro")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id ){
         comprobantesService.eliminar(id);

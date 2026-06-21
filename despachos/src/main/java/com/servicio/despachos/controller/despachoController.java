@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.despachos.model.Despacho;
 import com.servicio.despachos.service.DespachoService;
 
-
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -29,11 +29,13 @@ public class despachoController {
     @Autowired
     private DespachoService despachoService;
 
+    @Operation(summary = "Obtener todos los despachos", description ="Retorna una lista completa de los despachos")
     @GetMapping
     public List<Despacho> listar(){
         return despachoService.listarDespachos();
     }
 
+    @Operation(summary = "Crear un despacho", description ="Crea un comprobante en base a los datos ingresados por el usuario")
     @PostMapping("/{id}")
     public ResponseEntity<Despacho> crear(@PathVariable Long id){
         return despachoService.buscarPorId(id)
@@ -62,6 +64,7 @@ public class despachoController {
     //     }
     // }
 
+    @Operation(summary = "Borrar un despacho", description ="Borra el despacho cuya Id coincida con la que fue ingresada como parámetro")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         despachoService.eliminar(id);

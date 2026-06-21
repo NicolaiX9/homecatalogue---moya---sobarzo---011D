@@ -28,8 +28,11 @@ public class Venta {
     private Long id;
     private int total;
     private LocalDate fecha;
+
+    @Schema(description = "Id del carrito del microservicio de gestión de carritos.")
     private Long idCarrito;
 
+    @Schema(description = "Datos detallados del carrito. Se cargan en tiempo de ejecución via WebClient", accessMode = Schema.AccessMode.READ_ONLY)
     @Transient
     private Object datosCarrito;
     

@@ -27,8 +27,10 @@ public class Carrito {
 
     private int total;
 
+    @Schema(description = "Id del usuario del microservicio de gestión de usuarios.")
     private Long idUsuario;
 
+    @Schema(description = "Datos detallados del usuario. Se cargan en tiempo de ejecución via WebClient", accessMode = Schema.AccessMode.READ_ONLY)
     @Transient
     private Object datosUsuario;
 
