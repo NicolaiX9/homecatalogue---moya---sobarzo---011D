@@ -25,6 +25,8 @@ public class Suministro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Schema(description = "Id del producto del microservicio de gestión de productos.")
     private Long idProducto;
     private Long idDistribuidor;
     private int costo;
@@ -34,6 +36,7 @@ public class Suministro {
     @JoinColumn(name="distribuidor_id")
     private Distribuidor distribuidor;
 
+    @Schema(description = "Datos detallados del producto. Se cargan en tiempo de ejecución via WebClient", accessMode = Schema.AccessMode.READ_ONLY)
     @Transient
     private Object datosProducto;
 

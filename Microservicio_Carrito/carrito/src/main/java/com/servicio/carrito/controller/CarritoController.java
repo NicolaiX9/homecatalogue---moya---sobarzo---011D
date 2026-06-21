@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.carrito.model.Carrito;
 import com.servicio.carrito.service.CarritoService;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -29,21 +29,25 @@ public class CarritoController {
     @Autowired
     private CarritoService carritoService;
 
+    @Operation(summary = "Obtener todos los carritos", description ="Retorna una lista completa de carritos registrados")
     @GetMapping
     public List<Carrito> listar(){
         return carritoService.listar();
     }
 
+    @Operation(summary = "Obtener un carrito en base a su Id", description ="Retorna el carrito que posee el Id ingresado por el usuario")
     @GetMapping("/{id}")
     public Carrito buscarPorId(@PathVariable Long id){
         return carritoService.buscarPorId(id);
     }
 
+    @Operation(summary = "Crear un carrito", description ="Crea un carrito en base a los datos ingresados por el usuario")
     @PostMapping
     public Carrito guardar(@RequestBody Carrito carrito){
         return carritoService.crearCarrito(carrito);
     }
 
+    @Operation(summary = "Actualizar un carrito", description ="Actualiza un carrito en base a los datos ingresados por el usuario")
     @PutMapping("/{id}")
     public Carrito modificar(@PathVariable Long id, @RequestBody Carrito carrito){
        
@@ -59,7 +63,7 @@ public class CarritoController {
         
     }
 
-
+    @Operation(summary = "Borrar un carrito", description ="Borra el carrito cuya Id coincida con la que fue ingresada como parámetro")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         carritoService.eliminarCarrito(id);

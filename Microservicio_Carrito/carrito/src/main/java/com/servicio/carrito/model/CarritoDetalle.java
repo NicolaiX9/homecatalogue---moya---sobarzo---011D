@@ -26,7 +26,7 @@ public class CarritoDetalle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-
+    @Schema(description = "Id del producto del microservicio de gestión de productos.")
     private Long idProducto;
 
     private int cantidad;
@@ -35,6 +35,7 @@ public class CarritoDetalle {
     @JoinColumn(name="carrito_id")
     private Carrito carrito;
 
+    @Schema(description = "Datos detallados del producto. Se cargan en tiempo de ejecución via WebClient", accessMode = Schema.AccessMode.READ_ONLY)
     @Transient
     private Object datosProducto;
 
