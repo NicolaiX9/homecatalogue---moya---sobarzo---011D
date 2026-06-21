@@ -3,6 +3,7 @@ package com.servicio.stock.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,11 +15,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.servicio.stock.model.Stock;
 import com.servicio.stock.repository.StockRepository;
+
+import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
 public class StockServiceTest {
@@ -47,17 +51,30 @@ public class StockServiceTest {
         stock.setCantidad(50);
         stock.setIdProducto(1L);
         stock.setIdAlmacen(1L);
-        stock.setDatosAlmacen(stock.getDatosAlmacen());
-        stock.setDatosProducto(stock.getDatosProducto());
+       
         List<Stock> listaStock = List.of(stock);
         when(stockRepository.findAll()).thenReturn(listaStock);
+
+        WebClient webClient  = Mockito.mock(WebClient.class);
+        WebClient.RequestHeadersUriSpec uriSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
+        WebClient.RequestHeadersSpec headersSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
+        WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
+        
+        when(webClientbBuilder.build()).thenReturn(webClient);
+        when(webClient.get()).thenReturn(uriSpec);
+        when(uriSpec.uri(anyString())).thenReturn(headersSpec);
+        when(headersSpec.retrieve()).thenReturn(responseSpec);
+        
+        when(responseSpec.bodyToMono(Stock.class)).thenReturn(Mono.just(stock));
+        
         List<Stock> resultado = stockService.listar();
-        assertNotNull(resultado);
+        assertNotNull(resultado, "La atencion no debe ser nula");
+        assertEquals(1L, resultado.get(0).getId());
         assertEquals(50, resultado.get(0).getCantidad());
         assertEquals(1L, resultado.get(0).getIdProducto());
         assertEquals(1L, resultado.get(0).getIdAlmacen());
-        assertEquals(stock, resultado.get(0).getDatosAlmacen());
-        assertEquals(stock, resultado.get(0).getDatosProducto());
+        assertEquals(1L, resultado.get(0).getDatosAlmacen());
+        assertEquals(1L, resultado.get(0).getDatosProducto());
         verify(stockRepository, times(1)).findAll();
     }
 
