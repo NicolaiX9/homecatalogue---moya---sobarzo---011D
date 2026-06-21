@@ -34,8 +34,8 @@ public class despachoController {
     public List<Despacho> listar(){
         return despachoService.listarDespachos();
     }
-
-    @Operation(summary = "Crear un despacho", description ="Crea un comprobante en base a los datos ingresados por el usuario")
+    
+    @Operation(summary = "Crear un despacho", description ="Crea un comprobante en base a los datos ingresados")
     @PostMapping("/{id}")
     public ResponseEntity<Despacho> crear(@PathVariable Long id){
         return despachoService.buscarPorId(id)
@@ -64,7 +64,7 @@ public class despachoController {
     //     }
     // }
 
-    @Operation(summary = "Borrar un despacho", description ="Borra el despacho cuya Id coincida con la que fue ingresada como parámetro")
+    @Operation(summary = "Borrar un despacho", description ="Borra el despacho cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         despachoService.eliminar(id);

@@ -36,19 +36,19 @@ public class CarritoDetalleController {
     }
 
 
-    @Operation(summary = "Obtener los detalles de un carrito en base a su Id", description ="Retorna el detalle de un carrito que posee el Id ingresado por el usuario")
+    @Operation(summary = "Obtener los detalles de un carrito mediante su Id", description ="Retorna el detalle del carrito cuyo Id coincide con el ingresado")
     @GetMapping("/{id}")
     public CarritoDetalle buscarPorId(@PathVariable Long id){
         return carritoDetalleService.buscarPorId(id);
     }
 
-    @Operation(summary = "Crear los detalles de un carrito", description ="Crea los detalles de un carrito en base a los datos ingresados por el usuario")
+    @Operation(summary = "Crear los detalles de un carrito", description ="Crea los detalles de un carrito en base a los datos ingresados")
     @PostMapping
     public CarritoDetalle guardar(@RequestBody CarritoDetalle carritoDetalle){
         return carritoDetalleService.crearCarritoDetalle(carritoDetalle);
     }
 
-    @Operation(summary = "Actualizar los detalles de un carrito", description ="Actualiza los detalles de un carrito en base a los datos ingresados por el usuario")
+    @Operation(summary = "Actualizar los detalles de un carrito", description ="Actualiza los detalles de un carrito en base a los datos ingresados")
     @PutMapping("/{id}")
     public CarritoDetalle modificar(@PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
        
@@ -64,7 +64,7 @@ public class CarritoDetalleController {
         
     }
 
-    @Operation(summary = "Borrar los detalles de un carrito", description ="Borra los detalles del carrito cuya Id coincida con la que fue ingresada como parámetro")
+    @Operation(summary = "Borrar los detalles de un carrito", description ="Borra los detalles del carrito cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         carritoDetalleService.eliminarCarritoDetalle(id);

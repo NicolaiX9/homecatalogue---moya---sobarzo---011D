@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.distribuidores.model.Distribuidor;
 import com.servicio.distribuidores.service.DistribuidorService;
 
-
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -28,11 +28,13 @@ public class DistribuidorController {
     @Autowired
     private DistribuidorService distribuidorService;
 
+    @Operation(summary = "Obtener todos los distribuidores", description ="Retorna una lista completa de los distribuidores")
     @GetMapping("/{id}")
     public List<Distribuidor> listar(){
         return distribuidorService.listar();
     }
 
+    @Operation(summary = "Obtener un distribuidor mediante su Id", description ="Retorna el distribuidor cuyo Id coincide con el ingresado")
     @GetMapping("/{id}")
     public ResponseEntity<Distribuidor> buscarPorId(@PathVariable Long id){
         return distribuidorService.buscarPorId(id)
@@ -40,8 +42,8 @@ public class DistribuidorController {
         .orElse(ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "Crear un distribuidor", description ="Crea un distribuidor en base a los datos ingresados")
     @PostMapping("/{id}")
-
     public Distribuidor guardar(@RequestBody Distribuidor distribuidor){
         return distribuidorService.guardarDistribuidor(distribuidor);
     }
@@ -69,6 +71,7 @@ public class DistribuidorController {
 
     // }
 
+    @Operation(summary = "Borrar un distribuidor", description ="Borra el distribuidor cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         distribuidorService.eliminarDistribuidor(id);

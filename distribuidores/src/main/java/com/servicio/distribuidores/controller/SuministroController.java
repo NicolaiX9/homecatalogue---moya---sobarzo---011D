@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.distribuidores.model.Suministro;
 import com.servicio.distribuidores.service.SuministroService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -27,16 +28,19 @@ public class SuministroController {
     @Autowired
     private SuministroService suministroService;
 
+    @Operation(summary = "Obtener todos los suministros de un producto", description ="Retorna una lista completa de los suministros de un producto")
     @GetMapping
     public List<Suministro> listar(){
         return suministroService.listar();
     }
 
+    
     @GetMapping("/{id}")
     public Suministro buscarPorId(@PathVariable Long id){
         return suministroService.buscarPorId(id);
     }
 
+    @Operation(summary = "Crear suministro", description ="Crea el suministro de un producto en base a los datos ingresados")
     @PostMapping
     public Suministro guardar(@RequestBody Suministro suministro){
         return suministroService.crearSuministro(suministro);
@@ -61,6 +65,7 @@ public class SuministroController {
 
     // }
 
+    @Operation(summary = "Borrar un suministro", description ="Borra el suministro cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         suministroService.eliminarSuministro(id);

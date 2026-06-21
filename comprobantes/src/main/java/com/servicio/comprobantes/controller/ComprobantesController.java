@@ -34,8 +34,8 @@ public class ComprobantesController {
     public List<Comprobantes> listar(){
         return comprobantesService.listar();
     }
-
-    @Operation(summary = "Crear un comprobante", description ="Crea un comprobante en base a los datos ingresados por el usuario")
+    
+    @Operation(summary = "Crear un comprobante", description ="Crea un comprobante en base a los datos ingresados")
     @PostMapping("/{id}")
     public ResponseEntity<Comprobantes> crear(@PathVariable Long id){
         return comprobantesService.buscarPorId(id)
@@ -43,7 +43,7 @@ public class ComprobantesController {
         .orElse(ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Borrar un comprobante", description ="Borra el comprobante cuya Id coincida con la que fue ingresada como parámetro")
+    @Operation(summary = "Borrar un comprobante", description ="Borra el comprobante cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id ){
         comprobantesService.eliminar(id);

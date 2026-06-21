@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.service.ProductoCategoriaService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -27,16 +28,19 @@ public class ProductoCategoriaController {
     @Autowired
     private ProductoCategoriaService productoCategoriaService;
 
+    @Operation(summary = "Obtener todas las categorías de productos", description ="Retorna una lista completa de las categorías de productos")
     @GetMapping
     public List<ProductoCategoria> listar(){
         return productoCategoriaService.listar();
     }
 
+    @Operation(summary = "Crear la categoría de un producto", description ="Crea la categoría de un producto en base a los datos ingresados")
     @PostMapping
     public ProductoCategoria guardar(@RequestBody ProductoCategoria productoCategoria){
         return productoCategoriaService.guardar(productoCategoria);
     }
 
+    @Operation(summary = "Borrar una categoría de producto", description ="Borra la categoría de producto cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id){
         productoCategoriaService.eliminar(id);
