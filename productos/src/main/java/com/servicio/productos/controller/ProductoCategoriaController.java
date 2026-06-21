@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.service.ProductoCategoriaService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/productos/categoria")
+@Tag(name = "Categorías de producto", description = "Operaciones relacionadas con la gestión de las categorías de los productos")
 public class ProductoCategoriaController {
 
     @Autowired

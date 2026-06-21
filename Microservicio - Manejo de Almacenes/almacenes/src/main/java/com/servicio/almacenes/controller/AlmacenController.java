@@ -16,9 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.almacenes.model.Almacen;
 import com.servicio.almacenes.service.AlmacenService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+
+
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/almacenes")
+@Tag(name = "Almacenes", description = "Operaciones relacionadas con la gestión de almacenes")
 public class AlmacenController {
 
     @Autowired

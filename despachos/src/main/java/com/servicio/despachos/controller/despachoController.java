@@ -17,9 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.despachos.model.Despacho;
 import com.servicio.despachos.service.DespachoService;
 
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/despacho")
+@RequestMapping("/api/v1/despachos")
+@Tag(name = "Despachos", description = "Operaciones relacionadas con la gestión de despachos")
 public class despachoController {
     
     @Autowired

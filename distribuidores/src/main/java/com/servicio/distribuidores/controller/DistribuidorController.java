@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.distribuidores.model.Distribuidor;
 import com.servicio.distribuidores.service.DistribuidorService;
 
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/distribuidor")
+@RequestMapping("/api/v1/distribuidores")
+@Tag(name = "Distribuidores", description = "Operaciones relacionadas con la gestión de distribuidores")
 public class DistribuidorController {
     
     @Autowired

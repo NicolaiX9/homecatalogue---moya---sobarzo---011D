@@ -16,10 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.servicio.transportista.model.Transportista;
 import com.servicio.transportista.service.TransportistaService;
 
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 //CrossOrigin permite que Swagger lo llame desde cualquier puerto
 @CrossOrigin(origins="*") 
 @RestController
 @RequestMapping("/api/v1/transportistas")
+@Tag(name = "Transportistas", description = "Operaciones relacionadas con la gestión de transportistas")
 public class TransportistaController {
 
     

@@ -1,5 +1,6 @@
 package com.servicio.usuario.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "Modelo que representa un usuario en el sistema")
 public class Usuario {
 
     @Id

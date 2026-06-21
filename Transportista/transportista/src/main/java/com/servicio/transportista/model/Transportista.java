@@ -1,5 +1,6 @@
 package com.servicio.transportista.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "transportista")
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(description = "Modelo que representa un transportista en el sistema")
 public class Transportista {
 
     @Id
