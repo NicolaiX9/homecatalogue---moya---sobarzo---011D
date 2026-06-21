@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicio.almacenes.config.ErrorResponse;
 import com.servicio.almacenes.model.Almacen;
 import com.servicio.almacenes.service.AlmacenService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
@@ -37,11 +42,15 @@ public class AlmacenController {
     }
 
     @Operation(summary = "Obtener un almacén mediante su Id", description ="Retorna el almacen cuyo Id coincide con el ingresado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Paciente encontrado"),
+        @ApiResponse(responseCode = "404", description = "No existe el paciente que busca", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/{id}")
     public ResponseEntity <Almacen> buscarPorId(@PathVariable Long id) {
         return almacenService.buscarPorId(id)
         .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+        .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
     }
 
     @Operation(summary = "Crear un almacén", description ="Crea un almacén en base a los datos ingresados")

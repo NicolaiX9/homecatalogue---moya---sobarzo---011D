@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicio.distribuidores.config.ErrorResponse;
 import com.servicio.distribuidores.model.Suministro;
 import com.servicio.distribuidores.service.SuministroService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -34,7 +39,11 @@ public class SuministroController {
         return suministroService.listar();
     }
 
-    
+    @Operation(summary = "Obtener un suministro mediante su Id", description ="Retorna el suministro cuyo Id coincide con el ingresado")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Paciente encontrado"),
+        @ApiResponse(responseCode = "404", description = "No existe el paciente que busca", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/{id}")
     public Suministro buscarPorId(@PathVariable Long id){
         return suministroService.buscarPorId(id);

@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicio.transportista.config.ErrorResponse;
 import com.servicio.transportista.model.Transportista;
 import com.servicio.transportista.service.TransportistaService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 //CrossOrigin permite que Swagger lo llame desde cualquier puerto
@@ -38,11 +43,15 @@ public class TransportistaController {
     }
 
     @Operation(summary = "Obtener un transportista mediante su Id", description ="Retorna el transportista cuya Id coincide con la ingresada")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Paciente encontrado"),
+        @ApiResponse(responseCode = "404", description = "No existe el paciente que busca", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
     @GetMapping("/{id}")
     public ResponseEntity <Transportista> encontrarPorId(@PathVariable Long id) {
         return transportistaService.buscarPorId(id)
         .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+        .orElseThrow(() -> new RuntimeException("Transportista no encontrado"));
     }
     
     @Operation(summary = "Obtener un transportista mediante su rut", description ="Retorna el transportista cuyo rut coincide con la ingresada")

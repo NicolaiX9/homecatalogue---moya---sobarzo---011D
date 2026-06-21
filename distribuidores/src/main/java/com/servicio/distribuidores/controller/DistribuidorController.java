@@ -13,10 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicio.distribuidores.config.ErrorResponse;
 import com.servicio.distribuidores.model.Distribuidor;
 import com.servicio.distribuidores.service.DistribuidorService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins="*")
@@ -29,17 +34,22 @@ public class DistribuidorController {
     private DistribuidorService distribuidorService;
 
     @Operation(summary = "Obtener todos los distribuidores", description ="Retorna una lista completa de los distribuidores")
-    @GetMapping("/{id}")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Paciente encontrado"),
+        @ApiResponse(responseCode = "404", description = "No existe el paciente que busca", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @GetMapping
     public List<Distribuidor> listar(){
         return distribuidorService.listar();
     }
 
     @Operation(summary = "Obtener un distribuidor mediante su Id", description ="Retorna el distribuidor cuyo Id coincide con el ingresado")
+    
     @GetMapping("/{id}")
     public ResponseEntity<Distribuidor> buscarPorId(@PathVariable Long id){
         return distribuidorService.buscarPorId(id)
         .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+        .orElseThrow(() -> new RuntimeException("Distribuidor no encontrado"));
     }
 
     @Operation(summary = "Crear un distribuidor", description ="Crea un distribuidor en base a los datos ingresados")
