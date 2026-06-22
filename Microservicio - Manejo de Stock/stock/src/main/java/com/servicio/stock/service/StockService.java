@@ -1,11 +1,15 @@
 package com.servicio.stock.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import com.servicio.stock.dto.AlmacenDTO;
+import com.servicio.stock.dto.ProductoDTO;
+import com.servicio.stock.dto.StockDTO;
 import com.servicio.stock.model.Stock;
 import com.servicio.stock.repository.StockRepository;
 
@@ -32,27 +36,66 @@ public class StockService {
 
 
 
-    public Stock buscarPorId(Long id){
+    public StockDTO buscarPorId(Long id){
         Stock stock = stockRepository.findById(id).orElse(null);
         
         if (stock != null){
             //El enriquecer paciente trae los datos en orden 
-            return obtenerDatosAlmacenProducto(stock);
+            obtenerDatosAlmacenProducto(stock);
+
+            StockDTO dto = new StockDTO();
+            dto.setId(stock.getId());
+            dto.setCantidad(stock.getCantidad());
+            dto.setIdProducto(stock.getIdProducto());
+            dto.setIdAlmacen(stock.getIdAlmacen());
+
+            if(stock.getDatosProducto() instanceof ProductoDTO){
+                dto.setDatosProducto((ProductoDTO) stock.getDatosProducto());
+            } else {
+                dto.setDatosProducto(null);
+            }
+
+            if(stock.getDatosAlmacen() instanceof AlmacenDTO){
+                dto.setDatosAlmacen((AlmacenDTO) stock.getDatosAlmacen());
+            } else {
+                dto.setDatosAlmacen(null);
+            }
+
+            return dto;
         }
 
         return null;
     
     }
 
-    public List<Stock> listar(){
+    public List<StockDTO> listar(){
 
         List<Stock> lista = stockRepository.findAll();
+        List<StockDTO> listaDto = new ArrayList<>();
 
         for (Stock stock : lista){
             obtenerDatosAlmacenProducto(stock);
-    }
 
-        return stockRepository.findAll();
+            StockDTO dto = new StockDTO();
+            dto.setId(stock.getId());
+            dto.setCantidad(stock.getCantidad());
+            dto.setIdProducto(stock.getIdProducto());
+            dto.setIdAlmacen(stock.getIdAlmacen());
+
+            if(stock.getDatosProducto() instanceof ProductoDTO){
+                dto.setDatosProducto((ProductoDTO) stock.getDatosProducto());
+            } else {
+                dto.setDatosProducto(null);
+            }
+
+            if(stock.getDatosAlmacen() instanceof AlmacenDTO){
+                dto.setDatosAlmacen((AlmacenDTO) stock.getDatosAlmacen());
+            } else {
+                dto.setDatosAlmacen(null);
+            }
+            listaDto.add(dto);
+    }
+    return listaDto;
     }
 
     public void eliminarStock(Long id){
