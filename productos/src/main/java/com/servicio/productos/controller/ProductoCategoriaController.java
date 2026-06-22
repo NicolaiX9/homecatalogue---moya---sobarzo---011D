@@ -18,6 +18,7 @@ import com.servicio.productos.service.ProductoCategoriaService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -36,7 +37,7 @@ public class ProductoCategoriaController {
 
     @Operation(summary = "Crear la categoría de un producto", description ="Crea la categoría de un producto en base a los datos ingresados")
     @PostMapping
-    public ProductoCategoria guardar(@RequestBody ProductoCategoria productoCategoria){
+    public ProductoCategoria guardar(@Valid @RequestBody ProductoCategoria productoCategoria){
         return productoCategoriaService.guardar(productoCategoria);
     }
 

@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,8 @@ public class ProductoCategoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "La categoría de producto no puede estar vacía")
+    @Schema(description = "Categoría de producto" , requiredMode = Schema.RequiredMode.REQUIRED)
     private String categoria;
 }

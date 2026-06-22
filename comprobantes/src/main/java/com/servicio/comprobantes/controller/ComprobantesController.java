@@ -39,7 +39,7 @@ public class ComprobantesController {
     
     @Operation(summary = "Crear un comprobante", description ="Crea un comprobante en base a los datos ingresados")
     @PostMapping("/{id}")
-    public Comprobantes guardar(@RequestBody Comprobantes comprobantes){
+    public Comprobantes guardar(@Valid @RequestBody Comprobantes comprobantes){
         return comprobantesService.guardar(comprobantes);
     }
 

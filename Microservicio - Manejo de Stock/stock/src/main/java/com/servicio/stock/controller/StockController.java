@@ -20,6 +20,7 @@ import com.servicio.stock.service.StockService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -44,13 +45,13 @@ public class StockController {
 
     @Operation(summary = "Crear un stock", description ="Crea un stock en base a los datos ingresados")
     @PostMapping
-    public Stock guardar(@RequestBody Stock stock){
+    public Stock guardar(@Valid @RequestBody Stock stock){
         return stockService.crearStock(stock);
     }
 
     @Operation(summary = "Actualizar un stock", description ="Actualiza un stock en base a los datos ingresados")
     @PutMapping("/{id}")
-    public Stock modificar(@PathVariable Long id, @RequestBody Stock stock){
+    public Stock modificar(@Valid @PathVariable Long id, @RequestBody Stock stock){
        
            //StockDTO sto = stockService.buscarPorId(id);
            Stock stockModificar = new Stock();
