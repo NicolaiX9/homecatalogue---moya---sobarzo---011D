@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/usuarios/tipo")
+@RequestMapping("/api/v1/usuarios/tipos")
 @Tag(name = "Tipos de usuario", description = "Operaciones relacionadas con la gestión de los tipos de usuario")
 public class TipoUsuarioController {
 
