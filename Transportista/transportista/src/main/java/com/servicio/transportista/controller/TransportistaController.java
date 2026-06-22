@@ -71,6 +71,7 @@ public class TransportistaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void>eliminar(@PathVariable Long id){
         //El build() llama al constructor
+        transportistaService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 
