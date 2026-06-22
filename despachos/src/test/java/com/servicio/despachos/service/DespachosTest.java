@@ -36,7 +36,7 @@ public class DespachosTest {
         desp.setId(1L);
         desp.setFechaDesp(LocalDate.now());
         desp.setCalleDireccion("Camino Melipilla");
-        desp.setNumDireccion(1022);
+        desp.setNumDireccion("1022");
         desp.setIdVenta(1L);
         List<Despacho> listaDesp = List.of(desp);
         when(despachoRepository.findAll()).thenReturn(listaDesp);
@@ -56,7 +56,7 @@ public class DespachosTest {
         Despacho despacho =  new Despacho();
         despacho.setFechaDesp(LocalDate.now());
         despacho.setCalleDireccion("Silva Carvallo");
-        despacho.setNumDireccion(1122);
+        despacho.setNumDireccion("1122");
         despacho.setIdVenta(1L);
         when(despachoRepository.save(any(Despacho.class))).thenAnswer(invocation -> {
             Despacho a = invocation.getArgument(0);
