@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,10 @@ public class TipoUsuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     private Long id;
+
+
+    @NotBlank(message = "El rol no puede estar vacío")
+    @Schema(description = "El tipo de rol que pueden tener los usuarios" , example = "Administrador", requiredMode = Schema.RequiredMode.REQUIRED)
     private String rol;
 
 }

@@ -18,6 +18,7 @@ import com.servicio.usuario.repository.TipoUsuarioRepository;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -35,7 +36,7 @@ public class TipoUsuarioController {
     }
     
     @Operation(summary = "Crear un tipo de usuario", description ="Crea un tipo de usuario en base a los datos ingresados")
-    @PostMapping TipoUsuario guardar(@RequestBody TipoUsuario tipo){
+    @PostMapping TipoUsuario guardar(@Valid @RequestBody TipoUsuario tipo){
         return tipoUsuarioRepository.save(tipo);
     }
 

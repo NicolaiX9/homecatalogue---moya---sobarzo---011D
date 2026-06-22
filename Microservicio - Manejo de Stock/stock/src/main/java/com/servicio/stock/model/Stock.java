@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,12 @@ public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @NotNull(message = "La cantidad no puede estar vacía")
+    @Schema(description = "Cantidad del producto en el stock" , example = "40", requiredMode = Schema.RequiredMode.REQUIRED)
     private int cantidad;
+
 
     @Schema(description = "Id del producto del microservicio de gestión de productos.")
     private Long idProducto;
