@@ -113,7 +113,6 @@ public class StockServiceTest {
         CategoriaDTO categoriaDTO = new CategoriaDTO(1L, "Hogar");
         ProductoDTO productoDTO = new ProductoDTO(1L, "Estante Negro", "180X90X60", 21000, categoriaDTO );
 
-
         WebClient webClient  = Mockito.mock(WebClient.class);
         WebClient.RequestHeadersUriSpec uriSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
         WebClient.RequestHeadersSpec headersSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
