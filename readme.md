@@ -1,6 +1,6 @@
 Aplicaciones requeridas para su creación:
 
-Github Desktop, Xamp, Postman y Visual Studio Code.
+Github Desktop, Xamp, Postman, Swagger y Visual Studio Code.
 
 **MICROSERVICIOS**:
 
@@ -9,6 +9,11 @@ Github Desktop, Xamp, Postman y Visual Studio Code.
 3. Manejo de stock  
 4. Registro de almacenes  
 5. Manejo de carrito
+6. Manejo de distribuidores
+7. Manejo de despachos
+8. Registro de comprobantes
+9. Manejo de transportistas
+10. Registro de ventas
 
 **Bases de datos**:
 
@@ -17,22 +22,29 @@ Github Desktop, Xamp, Postman y Visual Studio Code.
 3. db\_stock  
 4. db\_almacenes  
 5. db\_carritos
+6. db\_distribuidores  
+7. db\_despachos  
+8. db\_comprobantes  
+9. db\_transportistas  
+10. db\_ventas
+11. db\_seguridad
+
+
+- **Api-Gateway**
+
+* **Puerto:** 9080  
+* **URL:** http://localhost:9080
+
+- **Auth-Service**
+
+* **Puerto:** 9101
+* **URL:** /auth
+
 
 - **Tipo usuario**
 
 * **Puerto:**9091  
 * **URL:** /api/v1/usuarios/tipos
-
-
-Datos JSON: 
-
-{  
-    "rol":"Administrador"  
-    }
-
-{  
-    "rol":"Cliente"  
-    }
 
 - **Usuario**
 
@@ -40,99 +52,23 @@ Datos JSON:
 * **URL:** /api/v1/usuarios
 
 
-Datos JSON: 
-
-   {  
-    "run":"12.415.547-8",  
-    "email":"agusGonzles@gmail.com",  
-    "nombre":"Agustin Gonzales",  
-    "password":"Agu123",  
-    "tipoUsuario": {"id": 1}  
-    }
-
-{  
-     
-    "run":"9.418.547-2",  
-    "email":"Rod.Pena@gmail.com",  
-    "nombre":"Rodrigo Peña",  
-    "password":"Gogeta125",  
-    "tipoUsuario": {"id": 1}  
-   
-
-}
-
-{  
-    "run":"15.438.647-K",  
-    "email":"Javcan@gmail.com",  
-    "nombre":"Javiera Canales",  
-    "password": "12octbros\!\!",    
-    "tipoUsuario": {"id": 2}  
-}
-
 - **ProductoCategoria**
 
 * **Puerto:** 9094  
 * **URL**: /api/v1/productos/categoria
 
-Datos JSON: 
-
-{  
-    "categoria":"Hogar"  
-    }  
-{  
-    "categoria":"Herramientas"  
-    }  
-{  
-    "categoria":"Jardín"  
-    }
 
 - **Producto**
 
 * **Puerto:** 9094  
 * **URL:** /api/v1/productos
 
-Datos JSON: 
-
-{  
-    "nombre":"Estante de 5 Niveles Negro ",  
-    "descripcion":"180x90x40 \- Color Negro",  
-    "precio":21000,  
-    "productoCategoria": {"id":2}  
-    }
-
-{  
-    "nombre":"Estante de 5 Niveles Negro ",  
-    "descripcion":"180x90x40 \- Color Negro",  
-    "precio":21000,  
-    "productoCategoria": {"id":2}  
-    }
-
-{  
-    "nombre":"Estante de 5 Niveles Verde ",  
-    "descripcion":"180x90x40 \- Color Verde",  
-    "precio":21000,  
-    "productoCategoria": {"id":1}  
-    }
 
 - **Carrito**
 
 * **Puerto:** 9095  
 * **URL:** /api/v1/carritos
 
-Datos JSON: 
-
-{  
-    "total":100000,  
-    "idUsuario": 1  
-    }  
-{  
-    "total":150000,  
-    "idUsuario": 1  
-    }  
-{  
-    "total":200000,  
-    "idUsuario": 2  
-    }
 
 - **Carrito Detalle**
 
@@ -140,71 +76,49 @@ Datos JSON:
 * **URL:** /api/v1/carritos/carritosdetalle
 
 
-Datos JSON: 
-
-{  
-    "idProducto":1,  
-    "cantidad":4,  
-    "carrito": {"id":1}  
-    }
-
-{  
-    "idProducto":2,  
-    "cantidad":2,  
-    "carrito": {"id":2}  
-    }
-
-{  
-    "idProducto":3,  
-    "cantidad":3,  
-    "carrito": {"id":3}  
-    }
-
 - **Almacén**
 
 * **Puerto:** 9092  
 * **URL:** /api/v1/almacenes
 
 
-Datos JSON: 
-
-{  
-   "calleDireccion":"San alfonso",  
-   "numeroDireccion":"1050"  
-    }
-
-{  
-   "calleDireccion":"Huerfanos",  
-   "numeroDireccion":"904"  
-    }
-
-{  
-   "calleDireccion":"Hugo bravo",  
-   "numeroDireccion":"84"  
-    }
-
 - **Stock**
 
 * **Puerto:** 9093  
 * **URL:** /api/v1/stock
 
-Datos JSON: 
 
-{  
-    "cantidad":150,  
-    "idProducto":1,  
-    "idAlmacen":1  
-    }
+- **Distribuidor **
 
-{  
-    "cantidad":200,  
-    "idProducto":2,  
-    "idAlmacen":2  
-    }
+* **Puerto:** 9097  
+* **URL:** /api/v1/distribuidores
 
-{  
-    "cantidad":200,  
-    "idProducto":3,  
-    "idAlmacen":3  
-    }
 
+- **Suministro**
+
+* **Puerto:** 9097  
+* **URL:** /api/v1/distribuidores/suministros
+
+
+- **Venta**
+
+* **Puerto:** 9100
+* **URL:** /api/v1/ventas
+
+
+- **Despacho**
+
+* **Puerto:** 9098
+* **URL:** /api/v1/despachos
+
+
+- **Transportista**
+
+* **Puerto:** 9099 
+* **URL:** /api/v1/transportistas
+
+
+- **Comprobante**
+
+* **Puerto:** 9096
+* **URL:** /api/v1/comprobantes
