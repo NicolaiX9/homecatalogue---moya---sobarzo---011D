@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.servicio.comprobantes.model.Comprobantes;
 import com.servicio.comprobantes.service.ComprobantesService;
@@ -18,6 +19,7 @@ import com.servicio.comprobantes.service.ComprobantesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -37,10 +39,8 @@ public class ComprobantesController {
     
     @Operation(summary = "Crear un comprobante", description ="Crea un comprobante en base a los datos ingresados")
     @PostMapping("/{id}")
-    public ResponseEntity<Comprobantes> crear(@PathVariable Long id){
-        return comprobantesService.buscarPorId(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    public Comprobantes guardar(@RequestBody Comprobantes comprobantes){
+        return comprobantesService.guardar(comprobantes);
     }
 
     @Operation(summary = "Borrar un comprobante", description ="Borra el comprobante cuya Id coincida con la que fue ingresada")

@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -54,7 +55,7 @@ public class DistribuidorController {
 
     @Operation(summary = "Crear un distribuidor", description ="Crea un distribuidor en base a los datos ingresados")
     @PostMapping("/{id}")
-    public Distribuidor guardar(@RequestBody Distribuidor distribuidor){
+    public Distribuidor guardar(@Valid @RequestBody Distribuidor distribuidor){
         return distribuidorService.guardarDistribuidor(distribuidor);
     }
 

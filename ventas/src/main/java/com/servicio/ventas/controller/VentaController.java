@@ -19,6 +19,7 @@ import com.servicio.ventas.service.VentaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -44,7 +45,7 @@ public class VentaController {
 
     @Operation(summary = "Crear una venta", description ="Crea una venta en base a los datos ingresados")
     @PostMapping
-    public Venta guardar(@RequestBody Venta venta){
+    public Venta guardar(@Valid @RequestBody Venta venta){
         return ventaService.crearVenta(venta);
     }
 

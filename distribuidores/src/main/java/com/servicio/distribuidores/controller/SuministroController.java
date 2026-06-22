@@ -24,6 +24,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -51,7 +52,7 @@ public class SuministroController {
 
     @Operation(summary = "Crear suministro", description ="Crea el suministro de un producto en base a los datos ingresados")
     @PostMapping
-    public Suministro guardar(@RequestBody Suministro suministro){
+    public Suministro guardar(@Valid @RequestBody Suministro suministro){
         return suministroService.crearSuministro(suministro);
     }
 

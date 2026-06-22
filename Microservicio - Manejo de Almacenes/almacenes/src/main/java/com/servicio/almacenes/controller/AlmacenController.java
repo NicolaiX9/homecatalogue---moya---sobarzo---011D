@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 
 
@@ -55,7 +56,7 @@ public class AlmacenController {
 
     @Operation(summary = "Crear un almacén", description ="Crea un almacén en base a los datos ingresados")
     @PostMapping
-    public Almacen guardar(@RequestBody Almacen almacen){
+    public Almacen guardar(@Valid @RequestBody Almacen almacen){
         return almacenService.crearAlmacen(almacen);
     }
 

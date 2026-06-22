@@ -25,6 +25,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 
 @CrossOrigin(origins="*")
@@ -55,7 +56,7 @@ public class UsuarioController {
     }
     
     @Operation(summary = "Crear un usuario", description ="Crea un usuario en base a los datos ingresados")
-    @PostMapping ResponseEntity <Usuario> guardar(@RequestBody Usuario usuario){
+    @PostMapping ResponseEntity <Usuario> guardar(@Valid @RequestBody Usuario usuario){
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuario));
     }
 
@@ -76,7 +77,7 @@ public class UsuarioController {
 
     @Operation(summary = "Actualizar un usuario", description ="Actualiza un usuario en base a los datos ingresados")
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> modificar(@PathVariable Long id, @RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> modificar(@Valid @PathVariable Long id, @RequestBody Usuario usuario){
        try {
             ResponseEntity <Usuario> user = usuarioService.buscarPorId(id)
             .map(ResponseEntity::ok)

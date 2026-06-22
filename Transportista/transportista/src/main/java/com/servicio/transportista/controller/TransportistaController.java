@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 //CrossOrigin permite que Swagger lo llame desde cualquier puerto
 @CrossOrigin(origins="*") 
@@ -62,7 +63,7 @@ public class TransportistaController {
 
 
     @Operation(summary = "Crear un transportista", description ="Crea un transportista en base a los datos ingresados")
-    @PostMapping ResponseEntity <Transportista> guardar(@RequestBody Transportista transportista){
+    @PostMapping ResponseEntity <Transportista> guardar(@Valid @RequestBody Transportista transportista){
         return ResponseEntity.ok(transportistaService.guardarTransportista(transportista));
     }
 

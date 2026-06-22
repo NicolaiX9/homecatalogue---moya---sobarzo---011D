@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +19,7 @@ import com.servicio.despachos.service.DespachoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -36,12 +37,11 @@ public class despachoController {
     }
     
     @Operation(summary = "Crear un despacho", description ="Crea un comprobante en base a los datos ingresados")
-    @PostMapping("/{id}")
-    public ResponseEntity<Despacho> crear(@PathVariable Long id){
-        return despachoService.buscarPorId(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+    @PostMapping
+    public Despacho crear(@Valid @RequestBody Despacho despacho){
+        return despachoService.guardarDespacho(despacho);
     }
+    
 
 
     // @PutMapping("/{id}")

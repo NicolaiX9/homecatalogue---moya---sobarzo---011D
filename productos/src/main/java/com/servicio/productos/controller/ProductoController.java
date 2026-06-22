@@ -24,6 +24,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -42,7 +43,7 @@ public class ProductoController {
 
     @Operation(summary = "Crear un producto", description ="Crea un producto en base a los datos ingresados")
     @PostMapping
-    public Producto guardar(@RequestBody Producto producto){
+    public Producto guardar(@Valid @RequestBody Producto producto){
         return productoService.crearProducto(producto);
     }
 
@@ -60,7 +61,7 @@ public class ProductoController {
 
     @Operation(summary = "Actualizar un producto", description ="Actualiza un producto en base a los datos ingresados")
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> modificar(@PathVariable Long id, @RequestBody Producto producto){
+    public ResponseEntity<Producto> modificar(@Valid @PathVariable Long id, @RequestBody Producto producto){
         try {
             ResponseEntity<Producto> prod = productoService.buscarPorId(id)
             .map(ResponseEntity::ok)

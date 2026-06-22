@@ -19,6 +19,7 @@ import com.servicio.carrito.service.CarritoDetalleService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -44,13 +45,13 @@ public class CarritoDetalleController {
 
     @Operation(summary = "Crear los detalles de un carrito", description ="Crea los detalles de un carrito en base a los datos ingresados")
     @PostMapping
-    public CarritoDetalle guardar(@RequestBody CarritoDetalle carritoDetalle){
+    public CarritoDetalle guardar(@Valid @RequestBody CarritoDetalle carritoDetalle){
         return carritoDetalleService.crearCarritoDetalle(carritoDetalle);
     }
 
     @Operation(summary = "Actualizar los detalles de un carrito", description ="Actualiza los detalles de un carrito en base a los datos ingresados")
     @PutMapping("/{id}")
-    public CarritoDetalle modificar(@PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
+    public CarritoDetalle modificar(@Valid @PathVariable Long id, @RequestBody CarritoDetalle carritoDetalle){
        
             CarritoDetalle carde = carritoDetalleService.buscarPorId(id);
             
