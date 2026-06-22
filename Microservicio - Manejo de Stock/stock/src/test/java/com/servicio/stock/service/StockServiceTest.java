@@ -41,13 +41,6 @@ public class StockServiceTest {
     @InjectMocks
     private StockService stockService;
 
-    // Metodos: 
-// Listar,
-// BuscarPorId,
-// Guardar,
-// Actualizar,
-// Eliminar.
-
     @Test
     @DisplayName("Deberia buscar por Id el stock correctamente")
     void buscarPorIdTest(){
@@ -84,17 +77,8 @@ public class StockServiceTest {
         assertEquals(50, resultado.getCantidad());
         assertEquals("Estante Negro", resultado.getDatosProducto().getNombre());
         assertEquals("Av Pajaritos", resultado.getDatosAlmacen().getCalleDireccion());
-
         verify(stockRepository, times(1)).findById(1L);
-
-
-
     }
-
-
-
-
-
 
     @Test
     @DisplayName("Deberia listar el despacho correctamente")
@@ -104,51 +88,37 @@ public class StockServiceTest {
         stock.setCantidad(50);
         stock.setIdProducto(1L);
         stock.setIdAlmacen(1L);
-       
         List<Stock> listaStock = List.of(stock);
-
         when(stockRepository.findAll()).thenReturn(listaStock);
-
         AlmacenDTO almacenDTO = new AlmacenDTO(1L, "Av Pajaritos", "1122");
         CategoriaDTO categoriaDTO = new CategoriaDTO(1L, "Hogar");
         ProductoDTO productoDTO = new ProductoDTO(1L, "Estante Negro", "180X90X60", 21000, categoriaDTO );
-
         WebClient webClient  = Mockito.mock(WebClient.class);
         WebClient.RequestHeadersUriSpec uriSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
         WebClient.RequestHeadersSpec headersSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
         WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
-        
         when(webClientbBuilder.build()).thenReturn(webClient);
         when(webClient.get()).thenReturn(uriSpec);
         when(uriSpec.uri(anyString())).thenReturn(headersSpec);
         when(headersSpec.retrieve()).thenReturn(responseSpec);
-        
         when(responseSpec.bodyToMono(any(Class.class)))
                 .thenReturn(Mono.just(productoDTO))
                 .thenReturn(Mono.just(almacenDTO));
-
-        
         List<StockDTO> resultado = stockService.listar();
-
         assertNotNull(resultado, "La lista de stock no debe ser nula");
         assertEquals(1, resultado.size(), "Deberia retornar examente un elemento");
-        
         StockDTO dtoResultados = resultado.get(0);
         assertEquals(1L, dtoResultados.getId());
         assertEquals(50,dtoResultados.getCantidad());
         assertEquals(1L,dtoResultados.getIdProducto());
         assertEquals(1L,dtoResultados.getIdAlmacen());
-
         assertNotNull(dtoResultados.getDatosAlmacen(), "Los datos del almacen no deben ser nulos");
         assertEquals("Av Pajaritos", dtoResultados.getDatosAlmacen().getCalleDireccion());
-
         assertNotNull(dtoResultados.getDatosProducto(), "Los datos del producto no deben ser nulos");
         assertEquals("Estante Negro", dtoResultados.getDatosProducto().getNombre());
         assertEquals("Hogar", dtoResultados.getDatosProducto().getProductoCategoria().getCategoria());
-
         verify(stockRepository, times(1)).findAll();
     }
-
 
     @Test
     @DisplayName("Deberia guardar el stock correctamente")
