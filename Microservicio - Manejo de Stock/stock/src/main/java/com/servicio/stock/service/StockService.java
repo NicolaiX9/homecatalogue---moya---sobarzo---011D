@@ -41,7 +41,7 @@ public class StockService {
         
         if (stock != null){
             //El enriquecer paciente trae los datos en orden 
-           
+            obtenerDatosAlmacenProducto(stock);
 
             StockDTO dto = new StockDTO();
             dto.setId(stock.getId());
@@ -50,7 +50,7 @@ public class StockService {
             dto.setIdAlmacen(stock.getIdAlmacen());
 
             if(stock.getDatosProducto() instanceof ProductoDTO){
-                dto.setDatosProducto((ProductoDTO) stock.getDatosAlmacen());
+                dto.setDatosProducto((ProductoDTO) stock.getDatosProducto());
             } else {
                 dto.setDatosProducto(null);
             }

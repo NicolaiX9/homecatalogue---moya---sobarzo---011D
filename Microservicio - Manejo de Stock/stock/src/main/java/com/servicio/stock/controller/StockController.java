@@ -52,13 +52,20 @@ public class StockController {
     @PutMapping("/{id}")
     public Stock modificar(@PathVariable Long id, @RequestBody Stock stock){
        
-           StockDTO sto = stockService.buscarPorId(id);
-            
-            sto.setCantidad(stock.getCantidad());            
-            
-            stockService.crearStock(sto);
+           //StockDTO sto = stockService.buscarPorId(id);
+           Stock stockModificar = new Stock();
+           stockModificar.setId(id);
+           stockModificar.setCantidad(stock.getCantidad());
+           stockModificar.setIdProducto(stock.getIdProducto());
+           stockModificar.setIdAlmacen(stock.getIdAlmacen());
 
-            return sto;
+           return stockService.crearStock(stockModificar);
+
+            // sto.setCantidad(stock.getCantidad());            
+            
+            // stockService.crearStock(sto);
+
+            // return sto;
             
         
     }

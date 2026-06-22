@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,6 +47,53 @@ public class StockServiceTest {
 // Guardar,
 // Actualizar,
 // Eliminar.
+
+    @Test
+    @DisplayName("Deberia buscar por Id el stock correctamente")
+    void buscarPorIdTest(){
+        Stock stock = new Stock();
+        stock.setId(1L);
+        stock.setCantidad(50);
+        stock.setIdProducto(1L);
+        stock.setIdAlmacen(1L);
+
+        when(stockRepository.findById(1L)).thenReturn(Optional.of(stock));
+
+        AlmacenDTO almacenDTO = new AlmacenDTO(1L, "Av Pajaritos", "1122");
+        CategoriaDTO categoriaDTO = new CategoriaDTO(1L, "Hogar");
+        ProductoDTO productoDTO = new ProductoDTO(1L, "Estante Negro", "180x90x60", 21000, categoriaDTO);
+
+        WebClient webClient  = Mockito.mock(WebClient.class);
+        WebClient.RequestHeadersUriSpec uriSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
+        WebClient.RequestHeadersSpec headersSpec = Mockito.mock(WebClient.RequestHeadersUriSpec.class);
+        WebClient.ResponseSpec responseSpec = Mockito.mock(WebClient.ResponseSpec.class);
+        
+        when(webClientbBuilder.build()).thenReturn(webClient);
+        when(webClient.get()).thenReturn(uriSpec);
+        when(uriSpec.uri(anyString())).thenReturn(headersSpec);
+        when(headersSpec.retrieve()).thenReturn(responseSpec);
+        
+        when(responseSpec.bodyToMono(any(Class.class)))
+                .thenReturn(Mono.just(productoDTO))
+                .thenReturn(Mono.just(almacenDTO));
+
+        StockDTO resultado = stockService.buscarPorId(1L);
+
+        assertNotNull(resultado, "El StockDTO no deberia ser nulo");
+        assertEquals(1L, resultado.getId());
+        assertEquals(50, resultado.getCantidad());
+        assertEquals("Estante Negro", resultado.getDatosProducto().getNombre());
+        assertEquals("Av Pajaritos", resultado.getDatosAlmacen().getCalleDireccion());
+
+        verify(stockRepository, times(1)).findById(1L);
+
+
+
+    }
+
+
+
+
 
 
     @Test
@@ -129,8 +176,32 @@ public class StockServiceTest {
     }
 
 
+    @Test
+    @DisplayName("Deberia actualizar un stock por ID correctamente")
+    void actualizarStockTest(){
+        Stock stock = new Stock();
+        stock.setId(1L);
+        stock.setCantidad(50);
+        stock.setIdAlmacen(1L);
+        stock.setIdProducto(1L);
 
+        when(stockRepository.findById(1L)).thenReturn(Optional.of(stock));
+        when(stockRepository.save(any(Stock.class))).thenAnswer(invocation ->{
+            Stock a = invocation.getArgument(0);
+            return a;
+        });
+        Stock resultado = stockService.crearStock(stock);
 
+        assertNotNull(resultado, "El stock actualizado no deberia ser null");
+        assertEquals(1L, resultado.getId());
+        assertEquals(50, resultado.getCantidad());
+        assertEquals(1L, resultado.getIdProducto());
+        assertEquals(1L, resultado.getIdAlmacen());
+
+        assertNotNull(resultado.getDatosAlmacen());
+        assertNotNull(resultado.getDatosProducto());
+        verify(stockRepository, times(1)).save(stock);
+    }
 
 
 
