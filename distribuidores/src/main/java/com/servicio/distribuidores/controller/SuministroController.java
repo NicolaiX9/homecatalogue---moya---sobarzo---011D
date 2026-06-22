@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/distribuidores/suministro")
+@RequestMapping("/api/v1/distribuidores/suministros")
 @Tag(name = "Suministros", description = "Operaciones relacionadas con la gestión de los suministros de los distribuidores")
 public class SuministroController {
     @Autowired
