@@ -30,7 +30,8 @@
             "mainClass": "com.servicio.usuario.UsuarioApplication",
             "projectName": "usuario",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -40,7 +41,8 @@
             "mainClass": "com.servicio.carrito.CarritoApplication",
             "projectName": "carrito",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -50,7 +52,8 @@
             "mainClass": "com.servicio.productos.ProductosApplication",
             "projectName": "productos",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -60,7 +63,8 @@
             "mainClass": "com.servicio.stock.StockApplication",
             "projectName": "stock",
             "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
         },
         {
             "type": "java",
@@ -69,6 +73,57 @@
             "cwd": "${workspaceFolder}",
             "mainClass": "com.hospital.service_auth.ServiceAuthApplication",
             "projectName": "service-auth",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ComprobantesApplication<comprobantes>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.servicio.comprobantes.ComprobantesApplication",
+            "projectName": "comprobantes",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DespachosApplication<despachos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.servicio.despachos.DespachosApplication",
+            "projectName": "despachos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DistribuidoresApplication<distribuidores>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.servicio.distribuidores.DistribuidoresApplication",
+            "projectName": "distribuidores",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TransportistaApplication<transportista>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.servicio.transportista.TransportistaApplication",
+            "projectName": "transportista",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-VentasApplication<ventas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.servicio.ventas.VentasApplication",
+            "projectName": "ventas",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
