@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.servicio.productos.model.Producto;
 import com.servicio.productos.repository.ProductoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ProductoService {
 
@@ -23,6 +25,7 @@ public class ProductoService {
         return productoRepository.findById(id);
     }
 
+    @Transactional
     public Producto crearProducto(Producto producto){
         return productoRepository.save(producto);
     }

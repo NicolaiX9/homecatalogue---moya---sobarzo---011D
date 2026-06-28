@@ -101,7 +101,7 @@ springdoc:
     urls:
       - name: Servicio Usuarios 
         url: /api/v1/usuarios/v3/api-docs
-      - name: Servicio almacenes
+      - name: Servicio Almacenes
         url: /api/v1/almacenes/v3/api-docs  
       - name: Servicio Stock
         url: /api/v1/stock/v3/api-docs
@@ -117,6 +117,10 @@ springdoc:
         url: /api/v1/transportistas/v3/api-docs
       - name: Servicio Distribuidores
         url: /api/v1/distribuidores/v3/api-docs
+      - name: Servicio Productos
+        url: /api/v1/productos/v3/api-docs
+      - name: Servicio Autenticación
+        url: /auth/v3/api-docs
 
 logging:
 

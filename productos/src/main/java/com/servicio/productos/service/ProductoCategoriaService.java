@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.servicio.productos.model.ProductoCategoria;
 import com.servicio.productos.repository.ProductoCategoriaRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ProductoCategoriaService {
 
@@ -19,6 +21,7 @@ public class ProductoCategoriaService {
         return productoCategoriaRepository.findAll();
     }
 
+    @Transactional
     public ProductoCategoria guardar(ProductoCategoria productoCategoria){
         return productoCategoriaRepository.save(productoCategoria);
     }
