@@ -55,7 +55,7 @@ public class UsuarioController {
         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
     
-    @Operation(summary = "Crear un usuario", description ="Crea un usuario en base a los datos ingresados")
+    @Operation(summary = "Crear un usuario. Al ingresar los datos del tipo de usuario se debe ingresar solo el id de este (el campo se escribe id, a secas).", description ="Crea un usuario en base a los datos ingresados")
     @PostMapping ResponseEntity <Usuario> guardar(@Valid @RequestBody Usuario usuario){
         return ResponseEntity.ok(usuarioService.guardarUsuario(usuario));
     }

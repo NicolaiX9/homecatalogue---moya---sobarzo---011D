@@ -21,7 +21,7 @@ public class TipoUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
 

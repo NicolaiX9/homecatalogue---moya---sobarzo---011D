@@ -24,7 +24,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     
@@ -40,12 +40,13 @@ public class Usuario {
     @Schema(description = "Correo electrónico del usuario" , example = "javierbarrer@gmail.com", requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
 
-    @NotBlank(message = "La contraseña no puede estar vacío")
+    @NotBlank(message = "La contraseña no puede estar vacía")
     @Schema(description = "Contraseña del usuario" , requiredMode = Schema.RequiredMode.REQUIRED)
     private String password;
-
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="tipo_usuario_id")
+    @Schema(description = "Datos del tipo de usuario. Si está posteando un usuario, reemplace (en el JSON) rol: por id:", requiredMode = Schema.RequiredMode.REQUIRED)
     private TipoUsuario tipoUsuario;
 
 

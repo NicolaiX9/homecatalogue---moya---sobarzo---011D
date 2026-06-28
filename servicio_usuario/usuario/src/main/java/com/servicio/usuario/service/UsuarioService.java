@@ -28,6 +28,7 @@ public class UsuarioService {
 
     @Transactional
     public Usuario guardarUsuario(Usuario usuario){
+        
         return usuarioRepository.save(usuario);
     }
 

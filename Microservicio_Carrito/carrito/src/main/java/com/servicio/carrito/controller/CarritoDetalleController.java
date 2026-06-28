@@ -43,7 +43,7 @@ public class CarritoDetalleController {
         return carritoDetalleService.buscarPorId(id);
     }
 
-    @Operation(summary = "Crear los detalles de un carrito", description ="Crea los detalles de un carrito en base a los datos ingresados")
+    @Operation(summary = "Crear los detalles de un carrito. Al ingresar los datos del carrito se debe ingresar solo el id de este (el campo se escribe id, a secas).", description ="Crea los detalles de un carrito en base a los datos ingresados")
     @PostMapping
     public CarritoDetalle guardar(@Valid @RequestBody CarritoDetalle carritoDetalle){
         return carritoDetalleService.crearCarritoDetalle(carritoDetalle);
