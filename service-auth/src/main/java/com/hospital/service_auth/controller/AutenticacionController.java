@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 
 import com.hospital.service_auth.dto.AuthRequest;
 import com.hospital.service_auth.model.Usuario;
@@ -19,6 +21,12 @@ import com.hospital.service_auth.service.AuthService;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/auth")
+@SecurityScheme(
+		  name = "Bearer Authentication",
+		  type = SecuritySchemeType.HTTP,
+		  bearerFormat = "JWT",
+		  scheme = "bearer"
+		)
 @Tag(name = "Autenticación", description = "Endpoints para registro y login de usuario")
 
 public class AutenticacionController {

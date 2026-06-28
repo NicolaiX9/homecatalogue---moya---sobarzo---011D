@@ -33,7 +33,16 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) ->
-        {
+        {   
+
+            //Código para que el gateway no bloquee el acceso mismo a las rutas de swagger, de modo que se pueda acceder a la ventana para usar el token en ellas 
+            String path = exchange.getRequest().getURI().getPath();
+            
+            if (path.contains("/v3/api-docs")) {
+
+                return chain.filter(exchange);
+            }
+
             //1.obtener la cabecera de forma segura
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer")){
