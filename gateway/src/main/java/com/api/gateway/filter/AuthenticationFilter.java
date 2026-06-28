@@ -1,7 +1,6 @@
 package com.api.gateway.filter;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.server.ServerWebExchange;
 
 import io.jsonwebtoken.Jwts;

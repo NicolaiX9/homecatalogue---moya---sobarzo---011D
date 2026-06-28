@@ -26,7 +26,7 @@ public class AutenticacionController {
     @Autowired
     private AuthService authService;
 
-    @Operation(summary = "Registrar un nuevo usuario", description= "Guarda el nuevo usuario con la contraseña encriptada")
+    @Operation(summary = "Registrar un nuevo usuario. Al ingresar los datos del rol se debe ingresar solo el id de este (el campo se escribe id, a secas) Los id disponibles son 1 (Cliente) y 2 (Administrador).", description= "Guarda el nuevo usuario con la contraseña encriptada")
     @PostMapping("/registrar")
     public ResponseEntity<String> registrar (@RequestBody Usuario usuario){
         return ResponseEntity.ok(authService.registrar(usuario));
