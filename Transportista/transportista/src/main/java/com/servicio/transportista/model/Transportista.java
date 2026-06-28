@@ -21,7 +21,7 @@ public class Transportista {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "El nombre no puede estar vacío")

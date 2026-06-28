@@ -25,6 +25,7 @@ public class Suministro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @Schema(description = "Id del producto del microservicio de gestión de productos.")

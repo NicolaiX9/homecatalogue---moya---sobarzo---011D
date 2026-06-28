@@ -21,6 +21,7 @@ public class Almacen {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     @NotBlank(message = "La calle no puede estar vacía")
     @Schema(description = "Calle de la dirección" , example = "Hugo Bravo", requiredMode = Schema.RequiredMode.REQUIRED)

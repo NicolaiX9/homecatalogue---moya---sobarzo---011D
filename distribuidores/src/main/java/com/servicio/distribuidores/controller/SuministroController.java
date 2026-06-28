@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,30 +49,12 @@ public class SuministroController {
         return suministroService.buscarPorId(id);
     }
 
-    @Operation(summary = "Crear suministro", description ="Crea el suministro de un producto en base a los datos ingresados")
+    @Operation(summary = "Crear un suministro. Al ingresar los datos del distribuidor se debe ingresar solo el id de este (el campo se escribe id, a secas).", description ="Crea el suministro de un producto en base a los datos ingresados")
     @PostMapping
     public Suministro guardar(@Valid @RequestBody Suministro suministro){
         return suministroService.crearSuministro(suministro);
     }
 
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Suministro> modificar(@PathVariable Long id, @RequestBody Suministro suministro){
-    //     try{
-    //         ResponseEntity<Suministro> sumi = suministroService.buscarPorId(id)
-    //         .map(ResponseEntity::ok)
-    //         .orElse(ResponseEntity.notFound().build());
-
-    //         sumi.getBody().setCosto(suministro.getCosto());
-    //         sumi.getBody().setCantidad(suministro.getCantidad());
-
-    //         suministroService.guardarSuministro(sumi.getBody());
-
-    //         return sumi;
-    //     } catch(Exception e) {
-    //         return ResponseEntity.notFound().build();
-    //     }
-
-    // }
 
     @Operation(summary = "Borrar un suministro", description ="Borra el suministro cuya Id coincida con la que fue ingresada")
     @DeleteMapping("/{id}")

@@ -25,6 +25,7 @@ public class Despacho {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotNull(message = "La fecha del despacho no puede estar vacía")

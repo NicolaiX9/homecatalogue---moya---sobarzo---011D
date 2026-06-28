@@ -16,7 +16,7 @@ public class OpenApiConfig {
         return new OpenAPI().info(new Info().title("API Home Catalogue - Servicio de Comprobantes")
         .version("1.0").description("Documentación centralizada del Software Home Catalogue"))
         //Esto es lo que solicita el Failed to Fetch
-        .servers(List.of(new Server().url("http:localhost:9080").description("Servidor a través del Gateway")));
+        .servers(List.of(new Server().url("http://localhost:9080").description("Servidor a través del Gateway")));
     }
 
 

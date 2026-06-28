@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class Distribuidor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "El rut del distribuidor no puede estar vacío")

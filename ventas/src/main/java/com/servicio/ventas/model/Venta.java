@@ -25,7 +25,7 @@ public class Venta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     
     @NotNull(message = "El total de la venta no puede estar vacío")

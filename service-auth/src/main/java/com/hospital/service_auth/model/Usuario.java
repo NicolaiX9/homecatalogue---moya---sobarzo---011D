@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.aspectj.lang.annotation.control.CodeGenerationHint;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,6 +24,7 @@ public class Usuario {
 
     @Id 
     @GeneratedValue
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private long id;
 
     @Column(unique = true)
