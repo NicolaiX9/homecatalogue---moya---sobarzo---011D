@@ -10,6 +10,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.servicio.carrito.model.Carrito;
 import com.servicio.carrito.repository.CarritoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CarritoService {
 
@@ -21,7 +23,7 @@ public class CarritoService {
     private CarritoRepository carritoRepository;
 
    
-
+   @Transactional
    public Carrito crearCarrito(Carrito carrito){
 
         Carrito guardado = carritoRepository.save(carrito);

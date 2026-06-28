@@ -21,9 +21,10 @@ public class ProductoCategoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
     @NotBlank(message = "La categoría de producto no puede estar vacía")
-    @Schema(description = "Categoría de producto" , requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Categoría de producto" , example = "Sillas", requiredMode = Schema.RequiredMode.REQUIRED)
     private String categoria;
 }

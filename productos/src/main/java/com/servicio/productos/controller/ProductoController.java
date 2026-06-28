@@ -41,7 +41,7 @@ public class ProductoController {
         return productoService.listar();
     }
 
-    @Operation(summary = "Crear un producto", description ="Crea un producto en base a los datos ingresados")
+    @Operation(summary = "Crear un producto. Al ingresar los datos de la categoría del producto se debe ingresar solo el id de esta (el campo se escribe id, a secas).", description ="Crea un producto en base a los datos ingresados")
     @PostMapping
     public Producto guardar(@Valid @RequestBody Producto producto){
         return productoService.crearProducto(producto);
