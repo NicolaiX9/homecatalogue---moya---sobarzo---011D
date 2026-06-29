@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.servicio.productos.model.Producto;
+import com.servicio.productos.model.ProductoCategoria;
+import com.servicio.productos.repository.ProductoCategoriaRepository;
 import com.servicio.productos.repository.ProductoRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +18,9 @@ public class ProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
+    @Autowired
+    private ProductoCategoriaRepository productoCategoriaRepository;
 
     public List<Producto> listar(){
         return productoRepository.findAll();
@@ -27,8 +32,15 @@ public class ProductoService {
 
     @Transactional
     public Producto crearProducto(Producto producto){
-        return productoRepository.save(producto);
-    }
+        ProductoCategoria cate = productoCategoriaRepository.findById(
+            //Busca el id y, si no existe, lanza un mensaje informándolo 
+            producto.getProductoCategoria().getId())
+        .orElseThrow(() -> new RuntimeException("Tipo de usuario no encontrado"));
+
+        producto.setProductoCategoria(cate);
+
+    return productoRepository.save(producto);
+}
 
     public void eliminarProducto(Long id){
         productoRepository.deleteById(id);

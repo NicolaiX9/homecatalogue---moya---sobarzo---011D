@@ -40,7 +40,7 @@ public class Producto {
     @Schema(description = "Precio del producto" , requiredMode = Schema.RequiredMode.REQUIRED)
     private int precio;
 
-    @Schema(description = "Id de la categoría del producto", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Id de la categoría del producto", requiredMode = Schema.RequiredMode.REQUIRED)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="producto_categoria_id")
     private ProductoCategoria productoCategoria;
