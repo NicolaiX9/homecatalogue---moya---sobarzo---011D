@@ -18,9 +18,11 @@ import com.servicio.comprobantes.service.ComprobantesService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
+@SecurityRequirement(name = "Bearer Authentication")
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/api/v1/comprobantes")
