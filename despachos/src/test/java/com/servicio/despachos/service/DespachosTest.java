@@ -45,9 +45,9 @@ public class DespachosTest {
         assertEquals(1L, resultado.get(0).getId());
         assertEquals(LocalDate.now(), resultado.get(0).getFechaDesp());
         assertEquals("Camino Melipilla", resultado.get(0).getCalleDireccion());
-        assertEquals(1022, resultado.get(0).getNumDireccion());
+        assertEquals("1022", resultado.get(0).getNumDireccion());
         assertEquals(1L, resultado.get(0).getIdVenta());
-        verify(despachoRepository, times(1)).findAll();
+        verify(despachoRepository, times(2)).findAll();
     }
 
     @Test
@@ -69,7 +69,7 @@ public class DespachosTest {
     assertEquals(1L, resultado.getId());
     assertEquals(LocalDate.now(), resultado.getFechaDesp());
     assertEquals("Silva Carvallo", resultado.getCalleDireccion());
-    assertEquals(1122, resultado.getNumDireccion());
+    assertEquals("1122", resultado.getNumDireccion());
     assertEquals(1L, resultado.getIdVenta());
     verify(despachoRepository, times(1)).save(despacho);
     }

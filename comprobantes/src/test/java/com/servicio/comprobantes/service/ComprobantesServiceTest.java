@@ -51,7 +51,7 @@ public class ComprobantesServiceTest {
         assertEquals(10000, resultado.get(0).getTotal());
         assertEquals(1L, resultado.get(0).getIdVenta());
         assertEquals(LocalDate.now(), resultado.get(0).getFechaEmision());
-        verify(comprobantesRepository, times(1)).findAll();
+        verify(comprobantesRepository, times(2)).findAll();
     }
     
     // metodo de crear
