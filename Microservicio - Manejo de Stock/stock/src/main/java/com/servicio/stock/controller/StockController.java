@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 @SecurityRequirement(name = "Bearer Authentication")
 @CrossOrigin(origins="*")
 @RestController
-@RequestMapping("/api/v1/stock")
+@RequestMapping("/api/v1/stocks")
 @Tag(name = "Stock", description = "Operaciones relacionadas con la gestión de stock")
 public class StockController {
     

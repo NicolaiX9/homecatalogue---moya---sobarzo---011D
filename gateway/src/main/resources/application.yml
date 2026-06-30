@@ -44,7 +44,7 @@ spring:
       - id: stock-service
         uri: http://localhost:9093
         predicates:
-          - Path=/api/v1/stock/**
+          - Path=/api/v1/stocks/**
         filters:
           - AuthenticationFilter
 
@@ -118,27 +118,27 @@ eureka:
 springdoc:
   swagger-ui:
     urls:
-      - name: Servicio Usuarios 
+      - name: Servicio de Usuarios 
         url: /api/v1/usuarios/v3/api-docs
-      - name: Servicio Almacenes
+      - name: Servicio de Almacenes
         url: /api/v1/almacenes/v3/api-docs  
-      - name: Servicio Stock
-        url: /api/v1/stock/v3/api-docs
-      - name: Servicio Carritos
+      - name: Servicio de Stocks
+        url: /api/v1/stocks/v3/api-docs
+      - name: Servicio de Carritos
         url: /api/v1/carritos/v3/api-docs
-      - name: Servicio Ventas
+      - name: Servicio de Ventas
         url: /api/v1/ventas/v3/api-docs
-      - name: Servicio Despachos
+      - name: Servicio de Despachos
         url: /api/v1/despachos/v3/api-docs
-      - name: Servicio Comprobantes
+      - name: Servicio de Comprobantes
         url: /api/v1/comprobantes/v3/api-docs
-      - name: Servicio Transportistas
+      - name: Servicio de Transportistas
         url: /api/v1/transportistas/v3/api-docs
-      - name: Servicio Distribuidores
+      - name: Servicio de Distribuidores
         url: /api/v1/distribuidores/v3/api-docs
-      - name: Servicio Productos
+      - name: Servicio de Productos
         url: /api/v1/productos/v3/api-docs
-      - name: Servicio Autenticación
+      - name: Servicio de Autenticación
         url: /auth/v3/api-docs
 
 logging:

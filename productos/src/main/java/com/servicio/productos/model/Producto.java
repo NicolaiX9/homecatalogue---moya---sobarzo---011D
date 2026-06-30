@@ -29,15 +29,15 @@ public class Producto {
     private Long id;
 
     @NotBlank(message = "El nombre del producto no puede estar vacío")
-    @Schema(description = "Nombre del producto" , requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Nombre del producto" , example = "Silla de Madera", requiredMode = Schema.RequiredMode.REQUIRED)
     private String nombre;
 
     @NotBlank(message = "La descripción del producto no puede estar vacía")
-    @Schema(description = "Descripción del producto" , requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Descripción del producto", example = "Silla de madera con almohadillas",  requiredMode = Schema.RequiredMode.REQUIRED)
     private String descripcion;
 
     @NotNull(message = "El precio del producto no puede estar vacío")
-    @Schema(description = "Precio del producto" , requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Precio del producto" , example = "40000", requiredMode = Schema.RequiredMode.REQUIRED)
     private int precio;
 
     @Schema(description = "Id de la categoría del producto", requiredMode = Schema.RequiredMode.REQUIRED)
