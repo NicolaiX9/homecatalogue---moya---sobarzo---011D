@@ -33,7 +33,7 @@ public class Venta {
     private int total;
 
     @NotNull(message = "La fecha de la venta no puede estar vacía")
-    @Schema(description = "La fecha de la venta" , example = "20-05-2026", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "La fecha de la venta" , example = "2025-11-16", requiredMode = Schema.RequiredMode.REQUIRED)
     private LocalDate fecha;
 
     @Schema(description = "Id del carrito del microservicio de gestión de carritos.")
