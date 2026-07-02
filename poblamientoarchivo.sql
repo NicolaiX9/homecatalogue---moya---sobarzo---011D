@@ -1,5 +1,5 @@
 -- =======================================================================
--- 1. LIMPIEZA TOTAL DE REGISTROS (Segura y compatible con llaves foráneas)
+-- 1. LIMPIEZA TOTAL DE REGISTROS (Negocio y Seguridad)
 -- =======================================================================
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -51,18 +51,62 @@ ALTER TABLE `db_transportistas`.`transportista` AUTO_INCREMENT = 1;
 DELETE FROM `db_despachos`.`despacho`;
 ALTER TABLE `db_despachos`.`despacho` AUTO_INCREMENT = 1;
 
--- db_seguridad (Microservicio de Autenticación)
-DELETE FROM `db_seguridad`.`usuario_roles`;
-DELETE FROM `db_seguridad`.`usuarios`;
-ALTER TABLE `db_seguridad`.`usuarios` AUTO_INCREMENT = 1;
-DELETE FROM `db_seguridad`.`roles`;
-ALTER TABLE `db_seguridad`.`roles` AUTO_INCREMENT = 1;
-
 SET FOREIGN_KEY_CHECKS = 1;
 
 
 -- =======================================================================
--- 2. INSERCIÓN DE DATOS: OPERACIONES DEL NEGOCIO (LOGÍSTICA Y VENTAS)
+-- 2. RECONSTRUCCIÓN COMPLETA DE LA BASE DE DATOS DE SEGURIDAD
+-- =======================================================================
+DROP DATABASE IF EXISTS `db_seguridad`;
+CREATE DATABASE `db_seguridad`;
+USE `db_seguridad`;
+
+-- --- Crear Tabla de Usuarios ---
+CREATE TABLE usuarios (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    correo VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- --- Crear Tabla de Roles ---
+CREATE TABLE roles (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre_rol VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- --- Crear Tabla Intermedia Real ---
+CREATE TABLE usuario_roles (
+    usuario_id BIGINT NOT NULL,
+    rol_id BIGINT NOT NULL,
+    PRIMARY KEY (usuario_id, rol_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (rol_id) REFERENCES roles(id) ON DELETE CASCADE
+);
+
+
+-- =======================================================================
+-- 3. POBLAMIENTO DEL MICROSERVICIO DE SEGURIDAD
+-- =======================================================================
+
+-- 1. Insertamos tus roles personalizados del negocio
+INSERT INTO roles (id, nombre_rol) VALUES 
+(1, 'ADMINISTRADOR'), 
+(2, 'CLIENTE');
+
+-- 2. Insertamos usuarios iniciales de prueba (con hashes válidos si usas BCrypt)
+INSERT INTO usuarios (id, nombre_usuario, contrasena, correo) VALUES
+(1, 'carlos.admin', '$2a$10$R9hZ...', 'carlos@empresa.com'),
+(2, 'mariajose.cliente', '$2a$10$K7xF...', 'mariajose@gmail.com');
+
+-- 3. Vinculamos las relaciones iniciales en la tabla intermedia
+INSERT INTO usuario_roles (usuario_id, rol_id) VALUES
+(1, 1), -- carlos.admin es ADMINISTRADOR
+(2, 2); -- mariajose.cliente es CLIENTE
+
+
+-- =======================================================================
+-- 4. INSERCIÓN DE DATOS: OPERACIONES DEL NEGOCIO (LOGÍSTICA Y VENTAS)
 -- =======================================================================
 
 -- --- NIVEL 1: Tablas Maestras ---
@@ -122,30 +166,3 @@ INSERT INTO `db_despachos`.`despacho` (`fecha_desp`, `calle_direccion`, `num_dir
 ('2026-07-03', 'Avenida Los Pajaritos', '1420', 1),
 ('2026-07-04', 'Pasaje Las Violetas', '302', 2),
 ('2026-07-05', 'Calle Nueva Extremadura', '9050', 3);
-
-
--- =======================================================================
--- 3. MICROSERVICIO DE SEGURIDAD (Mapeo corregido a usuario_roles)
--- =======================================================================
-USE `db_seguridad`;
-
-SET FOREIGN_KEY_CHECKS = 0;
-
--- 1. Insertamos los roles maestros asegurando sus IDs fijos (1 y 2)
-INSERT INTO `db_seguridad`.`roles` (`id`, `nombre_rol`) VALUES
-(1, 'ADMINISTRADOR'),
-(2, 'CLIENTE');
-
--- 2. Insertamos los usuarios iniciales (IDs forzados a 1, 2 y 3)
-INSERT INTO `db_seguridad`.`usuarios` (`id`, `nombre_usuario`, `contrasena`, `correo`) VALUES
-(1, 'carlos.admin', '$2a$10$R9hZ...', 'carlos@empresa.com'),
-(2, 'mariajose.cliente', '$2a$10$K7xF...', 'mariajose@gmail.com'),
-(3, 'juan.perez', '123456', 'juanperez@gmail.com');
-
--- 3. Vinculamos las relaciones directamente en la tabla intermedia 'usuario_roles'
-INSERT INTO `db_seguridad`.`usuario_roles` (`usuario_id`, `rol_id`) VALUES
-(1, 1), -- carlos.admin es ADMINISTRADOR
-(2, 2), -- mariajose.cliente es CLIENTE
-(3, 2); -- juan.perez es CLIENTE
-
-SET FOREIGN_KEY_CHECKS = 1;
