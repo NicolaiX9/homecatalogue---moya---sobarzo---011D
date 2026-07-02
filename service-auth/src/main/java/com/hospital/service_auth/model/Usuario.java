@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -21,7 +22,7 @@ import lombok.Data;
 public class Usuario {
 
     @Id 
-    @GeneratedValue
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private long id;
 
@@ -39,6 +40,7 @@ public class Usuario {
     private String correo;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Schema(description = "Datos del tipo de usuario. Si está posteando un usuario, reemplace (en el JSON) rol: por id:", requiredMode = Schema.RequiredMode.REQUIRED)
     @JoinTable( name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles =new HashSet<>();
 }
