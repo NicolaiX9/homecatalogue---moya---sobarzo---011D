@@ -40,7 +40,6 @@ public class Usuario {
     private String correo;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @Schema(description = "Datos del tipo de usuario. Si está posteando un usuario, reemplace (en el JSON) rol: por id:", requiredMode = Schema.RequiredMode.REQUIRED)
     @JoinTable( name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles =new HashSet<>();
 }
