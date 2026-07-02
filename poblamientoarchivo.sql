@@ -1,60 +1,61 @@
 -- =======================================================================
--- 1. LIMPIEZA TOTAL DE REGISTROS (Mantiene tablas y resetea contadores)
+-- 1. LIMPIEZA TOTAL DE REGISTROS (Segura y compatible con llaves foráneas)
 -- =======================================================================
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- db_usuarios
-DELETE FROM `db_usuarios`.`usuario` WHERE 1=1;
+DELETE FROM `db_usuarios`.`usuario`;
 ALTER TABLE `db_usuarios`.`usuario` AUTO_INCREMENT = 1;
-DELETE FROM `db_usuarios`.`tipo_usuario` WHERE 1=1;
+DELETE FROM `db_usuarios`.`tipo_usuario`;
 ALTER TABLE `db_usuarios`.`tipo_usuario` AUTO_INCREMENT = 1;
 
 -- db_productos
-DELETE FROM `db_productos`.`producto` WHERE 1=1;
+DELETE FROM `db_productos`.`producto`;
 ALTER TABLE `db_productos`.`producto` AUTO_INCREMENT = 1;
-DELETE FROM `db_productos`.`producto_categoria` WHERE 1=1;
+DELETE FROM `db_productos`.`producto_categoria`;
 ALTER TABLE `db_productos`.`producto_categoria` AUTO_INCREMENT = 1;
 
 -- db_distribuidores
-DELETE FROM `db_distribuidores`.`suministro` WHERE 1=1;
+DELETE FROM `db_distribuidores`.`suministro`;
 ALTER TABLE `db_distribuidores`.`suministro` AUTO_INCREMENT = 1;
-DELETE FROM `db_distribuidores`.`distribuidor` WHERE 1=1;
+DELETE FROM `db_distribuidores`.`distribuidor`;
 ALTER TABLE `db_distribuidores`.`distribuidor` AUTO_INCREMENT = 1;
 
 -- db_almacenes
-DELETE FROM `db_almacenes`.`almacen` WHERE 1=1;
+DELETE FROM `db_almacenes`.`almacen`;
 ALTER TABLE `db_almacenes`.`almacen` AUTO_INCREMENT = 1;
 
 -- db_stocks
-DELETE FROM `db_stocks`.`stock` WHERE 1=1;
+DELETE FROM `db_stocks`.`stock`;
 ALTER TABLE `db_stocks`.`stock` AUTO_INCREMENT = 1;
 
 -- db_carritos
-DELETE FROM `db_carritos`.`carrito_detalle` WHERE 1=1;
+DELETE FROM `db_carritos`.`carrito_detalle`;
 ALTER TABLE `db_carritos`.`carrito_detalle` AUTO_INCREMENT = 1;
-DELETE FROM `db_carritos`.`carrito` WHERE 1=1;
+DELETE FROM `db_carritos`.`carrito`;
 ALTER TABLE `db_carritos`.`carrito` AUTO_INCREMENT = 1;
 
 -- db_ventas
-DELETE FROM `db_ventas`.`venta` WHERE 1=1;
+DELETE FROM `db_ventas`.`venta`;
 ALTER TABLE `db_ventas`.`venta` AUTO_INCREMENT = 1;
 
 -- db_comprobantes
-DELETE FROM `db_comprobantes`.`comprobantes` WHERE 1=1;
+DELETE FROM `db_comprobantes`.`comprobantes`;
 ALTER TABLE `db_comprobantes`.`comprobantes` AUTO_INCREMENT = 1;
 
 -- db_transportistas
-DELETE FROM `db_transportistas`.`transportista` WHERE 1=1;
+DELETE FROM `db_transportistas`.`transportista`;
 ALTER TABLE `db_transportistas`.`transportista` AUTO_INCREMENT = 1;
 
 -- db_despachos
-DELETE FROM `db_despachos`.`despacho` WHERE 1=1;
+DELETE FROM `db_despachos`.`despacho`;
 ALTER TABLE `db_despachos`.`despacho` AUTO_INCREMENT = 1;
 
--- db_seguridad 
-DELETE FROM `db_seguridad`.`usuarios` WHERE 1=1;
+-- db_seguridad (Microservicio de Autenticación)
+DELETE FROM `db_seguridad`.`usuario_roles`;
+DELETE FROM `db_seguridad`.`usuarios`;
 ALTER TABLE `db_seguridad`.`usuarios` AUTO_INCREMENT = 1;
-DELETE FROM `db_seguridad`.`roles` WHERE 1=1;
+DELETE FROM `db_seguridad`.`roles`;
 ALTER TABLE `db_seguridad`.`roles` AUTO_INCREMENT = 1;
 
 SET FOREIGN_KEY_CHECKS = 1;
@@ -124,11 +125,10 @@ INSERT INTO `db_despachos`.`despacho` (`fecha_desp`, `calle_direccion`, `num_dir
 
 
 -- =======================================================================
--- 3. MICROSERVICIO DE SEGURIDAD (Forzado de llaves y mapeo estricto)
+-- 3. MICROSERVICIO DE SEGURIDAD (Mapeo corregido a usuario_roles)
 -- =======================================================================
 USE `db_seguridad`;
 
--- Desactivamos revisiones globales para saltar el error #1452 y #1062 de una vez por todas
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- 1. Insertamos los roles maestros asegurando sus IDs fijos (1 y 2)
@@ -136,17 +136,16 @@ INSERT INTO `db_seguridad`.`roles` (`id`, `nombre_rol`) VALUES
 (1, 'ADMINISTRADOR'),
 (2, 'CLIENTE');
 
--- 2. Insertamos los usuarios forzando sus IDs (1, 2, 3) para evitar el error duplicado '0'
+-- 2. Insertamos los usuarios iniciales (IDs forzados a 1, 2 y 3)
 INSERT INTO `db_seguridad`.`usuarios` (`id`, `nombre_usuario`, `contrasena`, `correo`) VALUES
 (1, 'carlos.admin', '$2a$10$R9hZ...', 'carlos@empresa.com'),
 (2, 'mariajose.cliente', '$2a$10$K7xF...', 'mariajose@gmail.com'),
 (3, 'juan.perez', '123456', 'juanperez@gmail.com');
 
--- 3. Vinculamos las relaciones directamente en las columnas que creó Hibernate
-INSERT INTO `db_seguridad`.`roles` (`usuario id`, `rol_id`) VALUES
+-- 3. Vinculamos las relaciones directamente en la tabla intermedia 'usuario_roles'
+INSERT INTO `db_seguridad`.`usuario_roles` (`usuario_id`, `rol_id`) VALUES
 (1, 1), -- carlos.admin es ADMINISTRADOR
 (2, 2), -- mariajose.cliente es CLIENTE
 (3, 2); -- juan.perez es CLIENTE
 
--- Volvemos a asegurar la integridad relacional de la base de datos
 SET FOREIGN_KEY_CHECKS = 1;
