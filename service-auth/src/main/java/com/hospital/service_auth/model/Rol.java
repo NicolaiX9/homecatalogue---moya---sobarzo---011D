@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Entity
-@Table(name = "roles")
+@Table(name ="roles")
 @Data
 public class Rol {
 
